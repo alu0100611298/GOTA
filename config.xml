@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+    xmlns:gap = "http://phonegap.com/ns/1.0"
+    id        = "c"
+    version   = "1.0.0">
+
+
+
+<name>iTempo</name>
+
+<description>
+Aplicación sobre el tiempo para el proyecto fin de grado
+</description>
+
+<author href="https://www.contanimacion.com" email="1985eliezer@gmail.com">
+Eliezer Cruz Suárez
+</author>
+
+
+ <preference name="phonegap-version" value="3.6.3" />
+ <gap:plugin name="org.apache.cordova.device" />
+ <gap:plugin name="org.apache.cordova.geolocation" />
+</widget>
