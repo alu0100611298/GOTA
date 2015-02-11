@@ -6,18 +6,19 @@
 
 
 
-<name>iTempo</name>
+	<name>iTempo</name>
 
-<description>
-Aplicación sobre el tiempo para el proyecto fin de grado
-</description>
+	<description>
+		Aplicación sobre el tiempo para el proyecto fin de grado
+	</description>
 
-<author href="https://www.contanimacion.com" email="1985eliezer@gmail.com">
-Eliezer Cruz Suárez
-</author>
+	<author href="https://www.contanimacion.com" email="1985eliezer@gmail.com">
+		Eliezer Cruz Suárez
+	</author>
 
 
- <preference name="phonegap-version" value="3.6.3" />
- <gap:plugin name="org.apache.cordova.device" />
- <gap:plugin name="org.apache.cordova.geolocation" />
+	<preference name="phonegap-version" value="3.6.3" />
+	<gap:plugin name="org.apache.cordova.device" />
+	<gap:plugin name="org.apache.cordova.geolocation" />
+	<access origin="*" />
 </widget>
