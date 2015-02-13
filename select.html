@@ -42,19 +42,24 @@ function initialize() {
     addMarker(event.latLng);
   });
 
-  // Adds a marker at the center of the map.
-  addMarker(tenerife);
 }
 
 // Add a marker to the map and push to the array.
 function addMarker(location) {
+  clearMarkers();
   var marker = new google.maps.Marker({
     position: location,
     map: map
   });
+  var infowindow = new google.maps.InfoWindow({
+    content: '<a href="información.html">Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng() + '</a>'
+  });
+  infowindow.open(map,marker);
+    
+    
   markers.push(marker);
 }
-
+        
 // Sets the map on all markers in the array.
 function setAllMap(map) {
   for (var i = 0; i < markers.length; i++) {
