@@ -12,10 +12,11 @@
 		Aplicación sobre el tiempo para el proyecto fin de grado
 	</description>
 
-	<author href="https://www.contanimacion.com" email="1985eliezer@gmail.com">
+	<author href="" email="1985eliezer@gmail.com">
 		Eliezer Cruz Suárez
 	</author>
 
+	<icon src="rain.png" />
 
 	<preference name="phonegap-version" value="3.6.3" />
 	<gap:plugin name="org.apache.cordova.device" />

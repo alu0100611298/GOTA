@@ -27,15 +27,16 @@
     // onSuccess Geolocation
     //
     function onSuccess(position) {
-        var element = document.getElementById('geolocation');
-        element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-                            'Longitude: '          + position.coords.longitude             + '<br />' +
-                            'Altitude: '           + position.coords.altitude              + '<br />' +
-                            'Accuracy: '           + position.coords.accuracy              + '<br />' +
-                            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-                            'Heading: '            + position.coords.heading               + '<br />' +
-                            'Speed: '              + position.coords.speed                 + '<br />' +
-                            'Timestamp: '          + position.timestamp                    + '<br />';
+        var element = document.getElementById('lista');
+        element.innerHTML = "<li data-icon='false'>Latitude: " + position.coords.latitude + "</li>" +
+        "<li data-icon='false'>Longitude: " + position.coords.longitude + "</li>" +
+        "<li data-icon='false'>Altitude: " + position.coords.altitude + "</li>" +
+        "<li data-icon='false'>Accuracy: " + position.coords.accuracy + "</li>" +
+        "<li data-icon='false'>Altitude Accuracy: " + position.coords.altitudeAccuracy + "</li>" +
+        "<li data-icon='false'>Heading: " + position.coords.speed + "</li>" +
+        "<li data-icon='false'>Timestamp: " + position.coords.timestamp + "</li>";
+        $('#lista').listview('refresh');
+                            
     }
 
     // onError Callback receives a PositionError object
@@ -48,25 +49,27 @@
     </script>
   </head>
   <body>
-      <div data-role="page">
+    <div data-role="page" data-theme="b">
+      <div data-role="header" data-position="fixed">
+      	<a href="#" data-role="button" data-rel="back">Back</a>
+        <h1>Predicción para tu lugar</h1>
+      </div><!-- /header -->
 
-  <div data-role="header" data-position="fixed">
-  	<a href="#" data-role="button" data-rel="back">Back</a>
-    <h1>Predicción para tu lugar</h1>
-  </div><!-- /header -->
+      <div data-role="content">
+        <ul data-role="listview" data-inset="true" id="lista">    
+          <li data-icon='false' id="geolocation">Finding geolocation...</li>
+        </ul>
+      </div><!-- /content -->
 
-  <div data-role="content">
-    <p id="geolocation">Finding geolocation...</p>
-  </div><!-- /content -->
-
-  <div data-role="footer" data-position="fixed">
-    <div data-role="navbar">
-      <ul>
-        <li><a href="#" data-role="button" data-icon="arrow-l" data-rel="back">Volver</a></li>
-        <li><a href="index.html" data-icon="home" rel="external">Home</a></li>
-        <li><a href="#" data-icon="search">Buscar</a></li>
-      </ul>
+      <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#" data-role="button" data-icon="arrow-l" data-rel="back">Volver</a></li>
+            <li><a href="index.html" data-icon="home" rel="external">Home</a></li>
+            <li><a href="#" data-icon="search">Buscar</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
   </body>
 </html>
