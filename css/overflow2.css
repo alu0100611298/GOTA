@@ -17,7 +17,7 @@
 
 body { margin: 0; } 
 div#slider { overflow: hidden; }
-div#slider figure img { width: 20%; }
+div#slider figure img { width: 20%; float: left; }
 div#slider figure { 
   position: relative;
   width: 500%;
@@ -25,8 +25,6 @@ div#slider figure {
   left: 0;
   text-align: left;
   font-size: 0;
-  animation: 30s slidy infinite;
-  -webkit-animation: 30s slidy infinite;
 }
 
 @-webkit-keyframes slidy {

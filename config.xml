@@ -21,5 +21,7 @@
 	<preference name="phonegap-version" value="3.6.3" />
 	<gap:plugin name="org.apache.cordova.device" />
 	<gap:plugin name="org.apache.cordova.geolocation" />
+	<gap:plugin name="net.yoik.cordova.plugins.screenorientation" />
+	
 	<access origin="*" />
 </widget>
