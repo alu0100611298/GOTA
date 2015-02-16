@@ -23,11 +23,13 @@
   </div><!-- /header -->
 
   <div data-role="content">
-    <form method="post" action="#" id="point" onchange="myFunction()">
-      <label for="points">Hora:</label>
-      <input type="range" name="points" id="points" value="0" min="0" max="24">
-    </form>
-    <img src='' alt='' id="image">       
+    <div data-role="fieldcontain" id="point">
+      <label for="points">Valor:</label>
+      <input type="range" name="points" id="points" value="0" min="0" max="24" />
+    </div>
+    <div>
+      <img src='' alt='' id="image">    
+    </div>
   </div><!-- /content -->
 	
   <div data-role="footer" data-position="fixed">
