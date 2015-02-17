@@ -1,19 +1,31 @@
 $(document).ready(function(){
 	var time = new Date();
-	var dia = time.getDate();
-	var mes = time.getMonth() + 1;
+	var dia = addZero(time.getDate());
+	var mes = addZero(time.getMonth() + 1);
 	var año = time.getFullYear();
-	var hora = time.getHours();
-	for (i = hora; i < 25; i++) { 
-	    //$("#date").append("<li><a href='galerias.html' rel='external'>" + dia + "/" + mes + "/" + año + "/" + i + "</a></li>");
-	    //$("#date").append("<img src='imagenes/" + dia + "/" + mes + "/" + año + "/" + i + ".jpg' alt=''>");
-	    //<img src="imagenes/13/2/2015/1.jpg" alt="">
-	}
+	var hora = addZero(time.getHours());
+	//hora = 0;
 	$("#points").attr("value", hora);
 	$("#points").attr("min", hora);
-	$("#image").attr("src", "imagenes/" + dia + "/" + mes + "/" + año + "/" + hora + ".jpg");
+	hora = addZero(hora);
+	$("#hora").text("Hora: " + hora + ":00");
+	$("#image").attr("src", "http://www.aemet.es/imagenes_d/eltiempo/observacion/satelite/" + año + "" + mes + "" + dia + "" + hora + "00_s93g.gif");
 	$("#point").change(function(){
 		var valor = $("#points").val();
-	    $("#image").attr("src", "imagenes/" + dia + "/" + mes + "/" + año + "/" + valor + ".jpg");
+		var day = dia;
+		if (valor > 23) {
+	        valor = valor - 24;
+	        day = dia + 1;
+	    }
+		valor = addZero(valor);
+		$("#hora").text("Hora: " + valor + ":00");
+	    $("#image").attr("src", "http://www.aemet.es/imagenes_d/eltiempo/observacion/satelite/" + año + "" + mes + "" + day + "" + valor + "00_s93g.gif");
 	});
 });
+
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
