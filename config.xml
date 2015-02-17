@@ -16,7 +16,7 @@
 		Eliezer Cruz Suárez
 	</author>
 
-	<icon src="rain.png" />
+	<icon src="iTempo.png" />
 
 	<preference name="phonegap-version" value="3.6.3" />
 	<gap:plugin name="org.apache.cordova.device" />
