@@ -14,8 +14,8 @@ $(document).ready(function(){
 	}
 
 	dia = dia + 1;
-	for (i = 0; i < 13; i++) { 
-	    $("#mañana").append("<li>" + i + ":00</li>"); 
+	for (i = 0; i < 13; i++) {
+		$("#mañana").append("<li class='dia'><a href='#hora'><img src='cloud.dark.rain.png'><h1>" + i + ":00</h1><h3>11º</h3><p>18 km/h</p><p>0.1 mm/h</p></a></li>"); 
 	}
 	$('#hoy').listview('refresh');
 	$('#mañana').listview('refresh');
