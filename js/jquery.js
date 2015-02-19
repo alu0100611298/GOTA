@@ -1,4 +1,8 @@
 $(document).ready(function(){
+	addMap();
+});
+
+function addMap(){
 	var time = new Date();
 	var dia = addZero(time.getDate() - 1);
 	var mes = addZero(time.getMonth() + 1);
@@ -21,8 +25,7 @@ $(document).ready(function(){
 		$("#hora").text("Fecha: " + dia + "/" + mes + "/" + año + " Hora: " + valor + ":00");
 	    $("#image").attr("src", "http://www.aemet.es/imagenes_d/eltiempo/observacion/satelite/" + año + "" + mes + "" + day + "" + valor + "00_s93g.gif");
 	});
-});
-
+}
 function addZero(i) {
     if (i < 10) {
         i = "0" + i;
