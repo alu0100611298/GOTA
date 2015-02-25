@@ -4,7 +4,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 // device APIs are available
 //
-function onDeviceReady() {
+function hubicacion() {
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
 

@@ -4,7 +4,7 @@
 
 var map;
 
-function initialize() {
+function map_geolocation() {
   var mapOptions = {
     zoom: 6
   };
