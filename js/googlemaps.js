@@ -4,7 +4,7 @@
 var map;
 var markers = [];
 
-function initialize() {
+function googlemaps() {
   var tenerife = new google.maps.LatLng(28.2932285, -16.522718);
   var mapOptions = {
     zoom: 10,
@@ -19,6 +19,8 @@ function initialize() {
     addMarker(event.latLng);
   });
 
+  google.maps.event.addDomListener(window, 'load', initialize);
+
 }
 
 // Add a marker to the map and push to the array.
@@ -30,7 +32,7 @@ function addMarker(location) {
   });
   var infowindow = new google.maps.InfoWindow({
     //content: '<a href="información.html">Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng() + '</a>'
-	content: '<a href="#dia">Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng() + '</a>'
+	content: '<a href="#dia" onclick="dia();">Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng() + '</a>'
   });
   infowindow.open(map,marker);
     
@@ -60,5 +62,3 @@ function deleteMarkers() {
   clearMarkers();
   markers = [];
 }
-
-google.maps.event.addDomListener(window, 'load', initialize);

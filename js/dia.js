@@ -1,4 +1,4 @@
-$(document).ready(function(){
+function dia(){
 
 	var time = new Date();
 	var dia = time.getDate();
@@ -19,4 +19,4 @@ $(document).ready(function(){
 	}
 	$('#hoy').listview('refresh');
 	$('#mañana').listview('refresh');
-});
+}
