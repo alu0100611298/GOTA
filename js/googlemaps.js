@@ -1,6 +1,15 @@
 // In the following example, markers appear when the user clicks on the map.
 // The markers are stored in an array.
 // The user can then click an option to hide, show or delete the markers.
+
+function loadScript()
+{
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = "http://maps.googleapis.com/maps/api/js?key=&sensor=false&callback=googlemaps";
+  document.body.appendChild(script);
+}
+
 var map;
 var markers = [];
 
@@ -19,7 +28,7 @@ function googlemaps() {
     addMarker(event.latLng);
   });
 
-  google.maps.event.addDomListener(window, 'load', initialize);
+  //google.maps.event.addDomListener(window, 'load', initialize);
 
 }
 

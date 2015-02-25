@@ -2,13 +2,21 @@
 // prompted by your browser. If you see a blank space instead of the map, this
 // is probably because you have denied permission for location sharing.
 
+function loadScript1()
+{
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = "http://maps.googleapis.com/maps/api/js?key=&sensor=false&callback=map_geolocation";
+  document.body.appendChild(script);
+}
+
 var map;
 
 function map_geolocation() {
   var mapOptions = {
     zoom: 6
   };
-  map = new google.maps.Map(document.getElementById('map-canvas'),
+  map = new google.maps.Map(document.getElementById('map1-canvas'),
       mapOptions);
 
   // Try HTML5 geolocation
