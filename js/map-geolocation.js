@@ -14,7 +14,7 @@ var map;
 
 function map_geolocation() {
   var mapOptions = {
-    zoom: 6
+    zoom: 10
   };
   map = new google.maps.Map(document.getElementById('map1-canvas'),
       mapOptions);
