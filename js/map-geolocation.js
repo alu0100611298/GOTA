@@ -28,7 +28,7 @@ function map_geolocation() {
       var infowindow = new google.maps.InfoWindow({
         map: map,
         position: pos,
-        content: '<a href="#dia">Predicción</a>'
+        content: '<a href="#dia" onclick="dia();">Predicción</a>'
       });
 
       map.setCenter(pos);
