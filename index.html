@@ -66,7 +66,7 @@
   <div data-role="footer" data-position="fixed">
     <div data-role="navbar">
       <ul>
-        <li><a href="jquery.html" data-icon="world" rel="external">Mapa</a></li>
+        <li><a href="#tenerife" data-icon="world" onclick="addMap();">Mapa</a></li>
         <li><a href="index.html" data-icon="home">Home</a></li>
         <li><a href="hubicacion.html" data-icon="sol" rel="external">Tiempo</a></li>
       </ul>
@@ -86,7 +86,7 @@
     <ul data-role="listview" data-inset="true">
       <li data-role="list-divider">Mapas de:</li>
       <li>
-        <a href="#tenerife" data-transition="slide">
+        <a href="#tenerife" data-transition="slide" onclick="addMap();">
         <img src="tenerife.png">
         <h2>Tenerife</h2>
         <p></p>
@@ -98,7 +98,7 @@
   <div data-role="footer" data-position="fixed">
     <div data-role="navbar">
       <ul>
-        <li><a href="#tenerife" data-icon="world">Mapa</a></li>
+        <li><a href="#tenerife" data-icon="world" onclick="addMap();">Mapa</a></li>
         <li><a href="#pageone" data-icon="home">Home</a></li>
         <li><a href="hubicacion.html" data-icon="sol" rel="external">Tiempo</a></li>
       </ul>
@@ -154,6 +154,13 @@
         </a>
       </li>
       <li>
+        <a href="map-geolocation.html" data-transition="slide" rel="external">
+        <img src="map3.png">
+        <h2>Hubicación por html5</h2>
+        <p>Obtener el tiempo en tu hubicación actual</p>
+        </a>
+      </li>
+      <li>
         <a href="googlemaps.html" data-transition="slide" rel="external">
         <img src="map1.png">
         <h2>Seleccionar</h2>
@@ -166,7 +173,7 @@
   <div data-role="footer" data-position="fixed">
     <div data-role="navbar">
       <ul>
-        <li><a href="jquery.html" data-icon="world" rel="external">Mapa</a></li>
+        <li><a href="#tenerife" data-icon="world" onclick="addMap();">Mapa</a></li>
         <li><a href="index.html" data-icon="home">Home</a></li>
         <li><a href="hubicacion.html" data-icon="sol" rel="external">Tiempo</a></li>
       </ul>

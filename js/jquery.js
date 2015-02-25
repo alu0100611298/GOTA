@@ -1,6 +1,6 @@
 $(document).ready(function(){
-	addMap();
 });
+
 
 function addMap(){
 	var time = new Date();

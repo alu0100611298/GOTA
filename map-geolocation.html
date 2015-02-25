@@ -23,7 +23,7 @@
       }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
-    <script src="js/googlemaps.js"></script>
+    <script src="js/map-geolocation.js"></script>
   </head>
   <body>
     <div data-role="page" id="pageone" data-theme="b">
@@ -33,14 +33,7 @@
         <h1>Predicción para tu lugar</h1>
       </div><!-- /header -->
     
-      <div data-role="content" >
-        <div data-role="navbar">
-          <ul>
-            <li><a href="#" data-role="button" onclick="clearMarkers();">Ocultar marcas</a></li>
-            <li><a href="#" data-role="button" onclick="showMarkers();">Mostrar marcas</a></li>
-            <li><a href="#" data-role="button" onclick="deleteMarkers();">Borrar marcas</a></li>
-          </ul>
-        </div>    
+      <div data-role="content" >    
         <div id="map-canvas" style="width:100%; height:350px;"></div>  
       </div><!-- /content -->
     
