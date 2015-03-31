@@ -1,10 +1,16 @@
-function dia(){
-
+function dia(latitud, longitud){
 	var time = new Date();
 	var dia = time.getDate();
 	var mes = time.getMonth() + 1;
 	var año = time.getFullYear();
 	var hora = time.getHours();
+
+	var url = 'http://10.209.2.98/variables_request/zona4/'+latitud+'/'+longitud+'/20150324/';
+
+	$.getJSON( url, function( data ) {
+	  alert(data["lugar"]);
+	});
+
 	for (i = hora; i < 24; i++) {
 		$("#hoy").append("<li class='dia'><a href='#hora'><img src='cloud.dark.rain.png'><h1>" + i + ":00</h1><h3>11º</h3><p>18 km/h</p><p>0.1 mm/h</p></a></li>"); 
 		//$("#hoy").append("<li class='dia'><a href=''><img src='cloud.dark.rain.png'  class='ui-li-icon' ><h1>" + i + ":00</h1><p>Lluvia</p></a></li>"); 

@@ -41,7 +41,7 @@ function addMarker(location) {
   });
   var infowindow = new google.maps.InfoWindow({
     //content: '<a href="información.html">Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng() + '</a>'
-	content: '<a href="#dia" onclick="dia();">Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng() + '</a>'
+	content: '<a href="#dia" onclick="dia('+ location.lat() +','+ location.lng() +');">Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng() + '</a>'
   });
   infowindow.open(map,marker);
     

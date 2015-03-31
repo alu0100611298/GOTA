@@ -66,7 +66,7 @@
         <a href="#lugar" data-transition="slide">
         <img src="iTempo.png">
         <h2>Predicción</h2>
-        <p>Predicción del tiempo</p>
+        <p class="json">Predicción del tiempo</p>
         </a>
       </li>
     </ul>
@@ -93,7 +93,7 @@
   </div><!-- /header -->
 
   <div data-role="content">
-    <ul data-role="listview" data-inset="true">
+    <ul data-role="listview" data-inset="true" id="refrescar">
       <li data-role="list-divider">Mapas de:</li>
       <li>
         <a href="#tenerife" data-transition="slide" onclick="addMap();">
@@ -101,6 +101,25 @@
         <h2>Tenerife</h2>
         <p></p>
         </a>
+      </li>
+      <li>
+        <form>
+          <fieldset data-role="controlgroup">
+              <legend>Vertical controlgroup:</legend>
+              <label for="select-native-1">Select A</label>
+              <select name="select-native-1" id="select-native-1">
+              </select>
+              <label for="select-native-2">Select B</label>
+              <select name="select-native-2" id="select-native-2">
+              </select>
+              <label for="select-native-3">Select C</label>
+              <select name="select-native-3" id="select-native-3">
+              </select>
+              <label for="select-native-4">Select E</label>
+              <select name="select-native-4" id="select-native-4">
+              </select>
+          </fieldset>
+        </form>
       </li>
     </ul>
   </div><!-- /content -->
@@ -191,7 +210,7 @@
   </div>
 </div><!-- /page -->
 
-<div data-role="page" id="googlemaps" data-theme="b">
+  <div data-role="page" id="googlemaps" data-theme="b">
     
       <div data-role="header" data-position="fixed">
         <a href="#" data-role="button" data-rel="back">Back</a>
