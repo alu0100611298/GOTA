@@ -96,7 +96,7 @@
     <ul data-role="listview" data-inset="true" id="refrescar">
       <li data-role="list-divider">Mapas de:</li>
       <li>
-        <a href="#tenerife" data-transition="slide" onclick="addMap();">
+        <a href="#tenerife" data-transition="slide" id="addMap" onclick="addMap();">
         <img src="tenerife.png">
         <h2>Tenerife</h2>
         <p></p>
@@ -147,7 +147,7 @@
     <div data-role="fieldcontain" id="point">
       <p id="url"></p>
       <label for="points" id="hora">Hora:</label>
-      <input type="range" name="points" id="points" value="0" min="6" max="36" />
+      <input type="range" name="points" id="points" value="6" min="6" max="36" step="1" />
     </div>
     <div>
       <img src='' alt='' id="image">    
