@@ -25,7 +25,11 @@ function googlemaps() {
 
   // This event listener will call addMarker() when the map is clicked.
   google.maps.event.addListener(map, 'click', function(event) {
-    addMarker(event.latLng);
+    var Zona = zona(event.latLng.lat(),event.latLng.lng());
+    if(Zona != -1){
+      addMarker(event.latLng);
+    }
+    
   });
 
   //google.maps.event.addDomListener(window, 'load', initialize);
@@ -40,8 +44,7 @@ function addMarker(location) {
     map: map
   });
   var infowindow = new google.maps.InfoWindow({
-    //content: '<a href="información.html">Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng() + '</a>'
-	content: '<a href="#dia" onclick="dia('+ location.lat() +','+ location.lng() +');">Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng() + '</a>'
+	content: '<a href="#dia" onclick="dia('+ location.lat() +','+ location.lng() +');">Obtener predicción</a>'
   });
   infowindow.open(map,marker);
     

@@ -1,30 +1,25 @@
-/*$(document).ready(function(){
-});
-$.getJSON( "http://10.209.2.98/variables_request/zona4/28.4108/-16.464/20150324/", function( data ) {
-  alert(data["lugar"]);
-  alert(data["prediccion20150322"][0]["meteograma"][0]);
-});
-
-$.getJSON( "http://10.209.2.98/media/demonio/prediccion_prueba2.json", function( data ) {
-  alert(data["prediccion20150322"][0]["meteograma"][0]);
-});*/
+var host = "http://10.209.2.98/";
 
 $(document).ready(function(){
-  var url = "http://10.209.2.98/forecast_info/";
+  var url = host + "forecast_info/";
   $.getJSON( url, function( data ) {
-    var cont = 0;
     var select_native_1;
+    var ultima_prediccion;
+    var fechas = [];
+    //Meto las fechas de las predicciones en el arry de fechas
     for (key in data){
-      $("#select-native-1").append("<option value='"+ key +"'>" + key + "</option>"); 
-      //alert(key);
-      if (cont == 0) select_native_1 = key;
-      cont = cont + 1;
+      fechas.push(key);
     }
-    //$('#select-native-1').selectmenu('refresh');
-    //var select_native_1 = $('#select-native-1').val();
-    //alert(select_native_1);
-    //alert(data[select_native_1][0]);
-    //alert(Object.keys(data[select_native_1][0]["meteograma"]));
+    //Ordeno el array
+    fechas.sort();
+    fechas.reverse();
+    //Imprimo los valores de las fechas en select
+    for (key in fechas){
+      $("#select-native-1").append("<option value='"+ fechas[key] +"'>" + fechas[key] + "</option>");
+    }
+    select_native_1 = fechas[0];
+    ultima_prediccion = select_native_1;
+    $("#select-native-1").val(select_native_1);
     for (key in data[select_native_1][0]["meteograma"]){
       $("#select-native-2").append("<option value='"+ data[select_native_1][0]["meteograma"][key] +"'>" + data[select_native_1][0]["meteograma"][key] + "</option>"); 
       //alert(key);
@@ -71,9 +66,19 @@ $(document).ready(function(){
         
         //alert(data[select_native_1][0]["fotos_url"]);
         valor = addZero(valor);
-        var imagen = "http://10.209.2.98/media/demonio/"+data[select_native_1][0]["fotos_url"]+"zona"+meteograma+"/"+parametrizaciones+"/"+variables+"/"+valor+".png";
+        var hora = valor
+        //Si es mas de 24 horas vuelve a 0
+        if(hora > 23){
+          hora = hora - 24;
+          //Si pasa un dia y no es la ultima predicción
+          if(ultima_prediccion != select_native_1){
+            var index = fechas.indexOf(select_native_1);
+            select_native_1 = fechas[index - 1];
+          }
+        }
+        var imagen = host + "media/demonio/"+data[select_native_1][0]["fotos_url"]+"zona"+meteograma+"/"+parametrizaciones+"/"+variables+"/"+valor+".png";
         $("#url").text(imagen);
-        $("#hora").text("Hora: "+valor+":00");
+        $("#hora").text("Fecha: "+select_native_1+" Hora: "+hora+":00");
         $("#image").attr("src", imagen);
         //alert("http://10.209.2.98/media/demonio/"+select_native_1+"/zona"+meteograma+"/"+parametrizaciones+"/"+variables+"/"+valor+".png");
           //$("#image").attr("src", "http://www.aemet.es/imagenes_d/eltiempo/observacion/satelite/" + año + "" + mes + "" + day + "" + valor + "00_s93g.gif");
@@ -87,7 +92,7 @@ $(document).ready(function(){
         
         //alert(data[select_native_1][0]["fotos_url"]);
         valor = addZero(valor);
-        var imagen = "http://10.209.2.98/media/demonio/"+data[select_native_1][0]["fotos_url"]+"zona"+meteograma+"/"+parametrizaciones+"/"+variables+"/"+valor+".png";
+        var imagen = host + "media/demonio/"+data[select_native_1][0]["fotos_url"]+"zona"+meteograma+"/"+parametrizaciones+"/"+variables+"/"+valor+".png";
         $("#url").text(imagen);
         $("#hora").text("Hora: "+valor+":00");
         $("#image").attr("src", imagen);

@@ -6,7 +6,7 @@
 
 
 
-	<name>iTempo</name>
+	<name>GOTA</name>
 
 	<description>
 		Aplicación sobre el tiempo para el proyecto fin de grado
@@ -18,10 +18,10 @@
 
 	<icon src="iTempo.png" />
 
-	<preference name="phonegap-version" value="3.6.3" />
-	<gap:plugin name="org.apache.cordova.device" />
+	<preference name="phonegap-version" value="3.7.0" />
+	<!--<gap:plugin name="org.apache.cordova.device" />
 	<gap:plugin name="org.apache.cordova.geolocation" />
-	<gap:plugin name="net.yoik.cordova.plugins.screenorientation" />
+	<gap:plugin name="net.yoik.cordova.plugins.screenorientation" />-->
 	
 	<access origin="*" />
 </widget>
