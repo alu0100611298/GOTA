@@ -1,7 +1,12 @@
 var host = "http://10.209.2.98/";
 
-$(document).ready(function(){
+function mapas(){
   var url = host + "forecast_info/";
+  //Vaciamos la lista se va a volver a cargar
+  $('#select-native-1').empty();
+  $('#select-native-2').empty();
+  $('#select-native-3').empty();
+  $('#select-native-4').empty();
   $.getJSON( url, function( data ) {
     var select_native_1;
     var ultima_prediccion;
@@ -22,21 +27,21 @@ $(document).ready(function(){
     $("#select-native-1").val(select_native_1);
     for (key in data[select_native_1][0]["meteograma"]){
       $("#select-native-2").append("<option value='"+ data[select_native_1][0]["meteograma"][key] +"'>" + data[select_native_1][0]["meteograma"][key] + "</option>"); 
-      //alert(key);
     }
-    //$('#select-native-2').selectmenu('refresh');
     for (key in data[select_native_1][0]["parametrizaciones"]){
       $("#select-native-3").append("<option value='"+ data[select_native_1][0]["parametrizaciones"][key] +"'>" + data[select_native_1][0]["parametrizaciones"][key] + "</option>"); 
-      //alert(key);
     }
-    //$('#select-native-3').selectmenu('refresh');
     for (key in data[select_native_1][0]["variables"]){
       $("#select-native-4").append("<option value='"+ data[select_native_1][0]["variables"][key] +"'>" + data[select_native_1][0]["variables"][key] + "</option>"); 
-      //alert(key);
     }
-    //$('#select-native-4').selectmenu('refresh');
+    //Refrescamos el contenido del desplegable despues de cargarlo
+    $('#select-native-1').selectmenu('refresh');
+    $('#select-native-2').selectmenu('refresh');
+    $('#select-native-3').selectmenu('refresh');
+    $('#select-native-4').selectmenu('refresh');
     $("#select-native-1").change(function(){
         var select_native_1 = $('#select-native-1').val();
+        //Cambiamos la seleccion borramos las listas que vamos a volver a cargar
         $('#select-native-2').empty();
         $('#select-native-3').empty();
         $('#select-native-4').empty();
@@ -58,53 +63,58 @@ $(document).ready(function(){
     });
 
     $("#point").change(function(){
-        var valor = $("#points").val();
-        var select_native_1 = $('#select-native-1').val();
-        var meteograma = $('#select-native-2').val();
-        var parametrizaciones = $('#select-native-3').val();
-        var variables = $('#select-native-4').val();
-        
-        //alert(data[select_native_1][0]["fotos_url"]);
-        valor = addZero(valor);
-        var hora = valor
-        //Si es mas de 24 horas vuelve a 0
-        if(hora > 23){
-          hora = hora - 24;
-          //Si pasa un dia y no es la ultima predicción
-          if(ultima_prediccion != select_native_1){
-            var index = fechas.indexOf(select_native_1);
-            select_native_1 = fechas[index - 1];
-          }
+      var valor = $("#points").val();
+      var select_native_1 = $('#select-native-1').val();
+      var meteograma = $('#select-native-2').val();
+      var parametrizaciones = $('#select-native-3').val();
+      var variables = $('#select-native-4').val();
+      
+      //alert(data[select_native_1][0]["fotos_url"]);
+      valor = addZero(valor);
+      var hora = valor
+      //Si es mas de 24 horas vuelve a 0
+      if(hora > 23){
+        hora = hora - 24;
+        //Si pasa un dia y no es la ultima predicción
+        if(ultima_prediccion != select_native_1){
+          var index = fechas.indexOf(select_native_1);
+          select_native_1 = fechas[index - 1];
         }
-        var imagen = host + "media/demonio/"+data[select_native_1][0]["fotos_url"]+"zona"+meteograma+"/"+parametrizaciones+"/"+variables+"/"+valor+".png";
-        $("#url").text(imagen);
-        $("#hora").text("Fecha: "+select_native_1+" Hora: "+hora+":00");
-        $("#image").attr("src", imagen);
-        //alert("http://10.209.2.98/media/demonio/"+select_native_1+"/zona"+meteograma+"/"+parametrizaciones+"/"+variables+"/"+valor+".png");
-          //$("#image").attr("src", "http://www.aemet.es/imagenes_d/eltiempo/observacion/satelite/" + año + "" + mes + "" + day + "" + valor + "00_s93g.gif");
-      });
-      $("#addMap").click(function(){
-        var valor = $("#points").val();
-        var select_native_1 = $('#select-native-1').val();
-        var meteograma = $('#select-native-2').val();
-        var parametrizaciones = $('#select-native-3').val();
-        var variables = $('#select-native-4').val();
-        
-        //alert(data[select_native_1][0]["fotos_url"]);
-        valor = addZero(valor);
-        var imagen = host + "media/demonio/"+data[select_native_1][0]["fotos_url"]+"zona"+meteograma+"/"+parametrizaciones+"/"+variables+"/"+valor+".png";
-        $("#url").text(imagen);
-        $("#hora").text("Hora: "+valor+":00");
-        $("#image").attr("src", imagen);
-        //Recojo el indice de la variable
-        var index = data[select_native_1][0]["variables"].indexOf(variables);
-        //Uso el indice para conocer el incremento de la variable
-        var step = data[select_native_1][0]["inc_variables"][index];
-        //Cambio el atributo del input radio por el salto correspondiente a la variable
-        $("#points").attr("step", step);
-      });
+      }
+      var imagen = host + "media/demonio/"+data[select_native_1][0]["fotos_url"]+"zona"+meteograma+"/"+parametrizaciones+"/"+variables+"/"+valor+".png";
+      $("#url").text(imagen);
+      $("#hora").text("Fecha: "+select_native_1+" Hora: "+hora+":00");
+      $("#image").attr("src", imagen);
+      //alert("http://10.209.2.98/media/demonio/"+select_native_1+"/zona"+meteograma+"/"+parametrizaciones+"/"+variables+"/"+valor+".png");
+        //$("#image").attr("src", "http://www.aemet.es/imagenes_d/eltiempo/observacion/satelite/" + año + "" + mes + "" + day + "" + valor + "00_s93g.gif");
+    });
+    $("#addMap").click(function(){
+      var time = new Date();
+      var hora = time.getHours();
+      //$("#points").val(hora);
+      //var valor = hora;
+      var valor =  $("#points").val();
+
+      var select_native_1 = $('#select-native-1').val();
+      var meteograma = $('#select-native-2').val();
+      var parametrizaciones = $('#select-native-3').val();
+      var variables = $('#select-native-4').val();
+      
+      //alert(data[select_native_1][0]["fotos_url"]);
+      valor = addZero(valor);
+      var imagen = host + "media/demonio/"+data[select_native_1][0]["fotos_url"]+"zona"+meteograma+"/"+parametrizaciones+"/"+variables+"/"+valor+".png";
+      $("#url").text(imagen);
+      $("#hora").text("Fecha: "+select_native_1+" Hora: "+valor+":00");
+      $("#image").attr("src", imagen);
+      //Recojo el indice de la variable
+      var index = data[select_native_1][0]["variables"].indexOf(variables);
+      //Uso el indice para conocer el incremento de la variable
+      var step = data[select_native_1][0]["inc_variables"][index];
+      //Cambio el atributo del input radio por el salto correspondiente a la variable
+      $("#points").attr("step", step);
+    });
   });
-});
+}
 
 
 function addZero(i) {

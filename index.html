@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html> 
 <head> 
-  <title>iTempo</title>
+  <title>GOTA</title>
   <meta charset="utf-8"> 
   <meta name="viewport" content="initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -26,10 +26,10 @@
       background-image: url("world-icon.png");
     }
     .page{
-       background-image: url('iTempo.png') !important; 
+       background-image: url('fondo.png') !important; 
        background-attachment: fixed !important; 
        background-repeat: repeat !important; 
-       background-size: 50px 50px !important;
+       background-size: 100px 100px !important;
     }
   </style>
   <link rel="stylesheet" href="css/index.css" />
@@ -46,14 +46,14 @@
 <div data-role="page" id="pageone" class="page">
 
   <div data-role="header" data-position="fixed">
-    <h1>iTempo</h1>
+    <h1>GOTA</h1>
   </div><!-- /header -->
 
   <div data-role="content">
   	<ul data-role="listview" data-inset="true">
       <li data-role="list-divider">¿Qué desea ver?</li>
       <li>
-        <a href="#galerias" data-transition="slide">
+        <a href="#galerias" data-transition="slide" onclick="mapas();">
         <img src="world.png">
         <h2>Mapas</h2>
         <p>Mapas de Canarias</p>
@@ -61,7 +61,7 @@
       </li>
       <li>
         <a href="#lugar" data-transition="slide">
-        <img src="iTempo.png">
+        <img src="imagen_1.png">
         <h2>Predicción</h2>
         <p class="json">Predicción del tiempo</p>
         </a>
@@ -73,9 +73,9 @@
   <div data-role="footer" data-position="fixed">
     <div data-role="navbar">
       <ul>
-        <li><a href="#galerias" data-icon="world" onclick="addMap();">Mapa</a></li>
+        <li><a href="#galerias" data-icon="world" onclick="mapas();">Mapa</a></li>
         <li><a href="#pageone" data-icon="home">Home</a></li>
-        <li><a href="#ubicacion" data-icon="sol" onclick="ubicacion();">Tiempo</a></li>
+        <li><a href="#lugar" data-icon="sol">Tiempo</a></li>
       </ul>
     </div>
   </div>
@@ -122,9 +122,9 @@
   <div data-role="footer" data-position="fixed">
     <div data-role="navbar">
       <ul>
-        <li><a href="#galerias" data-icon="world" onclick="addMap();">Mapa</a></li>
+        <li><a href="#galerias" data-icon="world" onclick="mapas();">Mapa</a></li>
         <li><a href="#pageone" data-icon="home">Home</a></li>
-        <li><a href="#ubicacion" data-icon="sol" onclick="ubicacion();">Tiempo</a></li>
+        <li><a href="#lugar" data-icon="sol">Tiempo</a></li>
       </ul>
     </div>
   </div>
@@ -154,7 +154,7 @@
       <ul>
         <li><a href="#" data-role="button" data-icon="arrow-l" data-rel="back">Volver</a></li>
         <li><a href="#pageone" data-icon="home">Home</a></li>
-        <li><a href="#ubicacion" data-icon="sol" onclick="ubicacion();">Tiempo</a></li>
+        <li><a href="#lugar" data-icon="sol">Tiempo</a></li>
       </ul>
     </div>
   </div>
@@ -191,9 +191,9 @@
   <div data-role="footer" data-position="fixed">
     <div data-role="navbar">
       <ul>
-        <li><a href="#galerias" data-icon="world" onclick="addMap();">Mapa</a></li>
+        <li><a href="#galerias" data-icon="world" onclick="mapas();">Mapa</a></li>
         <li><a href="index.html" data-icon="home">Home</a></li>
-        <li><a href="#ubicacion" data-icon="sol" onclick="ubicacion();">Tiempo</a></li>
+        <li><a href="#lugar" data-icon="sol">Tiempo</a></li>
       </ul>
     </div>
   </div>
@@ -222,7 +222,7 @@
           <ul>
             <li><a href="#" data-role="button" data-icon="arrow-l" data-rel="back">Volver</a></li>
             <li><a href="#pageone" data-icon="home">Home</a></li>
-            <li><a href="#galerias" data-icon="world" onclick="addMap();">Mapa</a></li>
+            <li><a href="#galerias" data-icon="world" onclick="mapas();">Mapa</a></li>
           </ul>
         </div>
       </div>
@@ -237,10 +237,6 @@
 
       <div data-role="content">
         <ul data-role="listview" data-inset="true" id="hoy">
-          <li data-role="list-divider">Hoy:</li>
-        </ul>
-        <ul data-role="listview" data-inset="true" id="mañana">
-          <li data-role="list-divider">Mañana</li>
         </ul>
       </div><!-- /content -->
 
@@ -249,7 +245,7 @@
           <ul>
             <li><a href="#" data-role="button" data-icon="arrow-l" data-rel="back">Volver</a></li>
             <li><a href="#pageone" data-icon="home">Home</a></li>
-            <li><a href="#galerias" data-icon="world" onclick="addMap();">Mapa</a></li>
+            <li><a href="#galerias" data-icon="world" onclick="mapas();">Mapa</a></li>
           </ul>
         </div>
       </div>
@@ -287,7 +283,7 @@
           <ul>
             <li><a href="#" data-role="button" data-icon="arrow-l" data-rel="back">Volver</a></li>
             <li><a href="#pageone" data-icon="home">Home</a></li>
-            <li><a href="#galerias" data-icon="world" onclick="addMap();">Mapa</a></li>
+            <li><a href="#galerias" data-icon="world" onclick="mapas();">Mapa</a></li>
         </div>
       </div>
     </div><!-- /page -->
@@ -308,7 +304,7 @@
           <ul>
             <li><a href="#" data-role="button" data-icon="arrow-l" data-rel="back">Volver</a></li>
             <li><a href="#pageone" data-icon="home">Home</a></li>
-            <li><a href="#galerias" data-icon="world" onclick="addMap();">Mapa</a></li>
+            <li><a href="#galerias" data-icon="world" onclick="mapas();">Mapa</a></li>
           </ul>
         </div>
       </div>

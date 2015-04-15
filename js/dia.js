@@ -11,12 +11,6 @@ function dia(latitud, longitud){
 	$.getJSON( url, function( data ) {
 		$("#hoy").empty();
 		$("#tu_lugar").text(data["lugar"]);
-		/*alert(data["winds"]["dates"]);
-		for(date in data["winds"]["dates"]){
-			var hora = data["winds"]["dates"][date];
-			var intesidad = data["winds"]["intensity"][date];
-			$("#hoy").append("<li class='dia'><a href='#hora'><img src='cloud.dark.rain.png'><h1>" + hora + "</h1><h3>11º</h3><p>"+ intesidad +" km/h</p><p>0.1 mm/h</p></a></li>"); 
-		}*/
 		var tam = data["winds"]["dates"].length;
 		for (i = hora; i < tam; i++) {
 			//alert(i);
@@ -31,45 +25,12 @@ function dia(latitud, longitud){
 			}else{
 				lluvia = (data["rain"]["values"][i]).toFixed(2);
 			}
-			$("#hoy").append("<li class='dia'><a href='#hora'><img src='cloud.dark.rain.png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h "+obtener_direccion(direccion)+"</p><p>"+lluvia+" mm/h</p></a></li>"); 
+			nubosidad = Math.floor((Math.random() * 4));
+			$("#hoy").append("<li class='dia'><a href='#hora'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h "+obtener_direccion(direccion)+"</p><p>"+lluvia+" mm/h</p></a></li>"); 
 		}
 
 		$('#hoy').listview('refresh');
 	});
-/*
-	dia = dia + 1;
-
-	var url = host + 'variables_request/zona4/'+latitud+'/'+longitud+'/'+año+''+addZero(mes)+''+addZero(dia)+'';
-	//alert(url);
-	$.getJSON( url, function( data ) {
-		
-		$("#mañana").empty();
-
-		for (i = 0; i < 25; i++) {
-			//alert(i);
-			var hour = data["winds"]["dates"][i];
-			var intesidad = (data["winds"]["intensity"][i]).toFixed(2);
-			var temperatura = (data["temper"]["values"][i]).toFixed(2);
-			var lluvia = (data["rain"]["values"][Math.floor(i/3)]).toFixed(2);
-			$("#mañana").append("<li class='dia'><a href='#hora'><img src='cloud.dark.rain.png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h</p><p>"+lluvia+" mm/h</p></a></li>"); 
-		}
-		$('#mañana').listview('refresh');
-	});*/
-	/*
-	for (i = hora; i < 24; i++) {
-		$("#hoy").append("<li class='dia'><a href='#hora'><img src='cloud.dark.rain.png'><h1>" + i + ":00</h1><h3>11º</h3><p>18 km/h</p><p>0.1 mm/h</p></a></li>"); 
-		//$("#hoy").append("<li class='dia'><a href=''><img src='cloud.dark.rain.png'  class='ui-li-icon' ><h1>" + i + ":00</h1><p>Lluvia</p></a></li>"); 
-	    //$("#hoy").append("<li>" + dia + "/" + mes + "/" + año + "/" + i + "</li>");
-	    //$("#date").append("<img src='imagenes/" + dia + "/" + mes + "/" + año + "/" + i + ".jpg' alt=''>");
-	    //<img src="imagenes/13/2/2015/1.jpg" alt="">
-	}
-
-	dia = dia + 1;
-	for (i = 0; i < 13; i++) {
-		$("#mañana").append("<li class='dia'><a href='#hora'><img src='cloud.dark.rain.png'><h1>" + i + ":00</h1><h3>11º</h3><p>18 km/h</p><p>0.1 mm/h</p></a></li>"); 
-	}
-	$('#hoy').listview('refresh');
-	$('#mañana').listview('refresh');*/
 }
 
 function obtener_direccion(direction){

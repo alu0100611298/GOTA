@@ -16,7 +16,7 @@
 		Eliezer Cruz Suárez
 	</author>
 
-	<icon src="iTempo.png" />
+	<icon src="gota.png" />
 
 	<preference name="phonegap-version" value="3.7.0" />
 	<!--<gap:plugin name="org.apache.cordova.device" />
