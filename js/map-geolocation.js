@@ -18,6 +18,9 @@ function map_geolocation() {
   };
   map = new google.maps.Map(document.getElementById('map1-canvas'),
       mapOptions);
+  var altura_dispositivo = $( window ).height();
+  var altura_total = altura_dispositivo * 0.75;
+  $('#map-canvas1').height(altura_total);
 
   // Try HTML5 geolocation
   if(navigator.geolocation) {
@@ -28,7 +31,7 @@ function map_geolocation() {
       var infowindow = new google.maps.InfoWindow({
         map: map,
         position: pos,
-        content: '<a href="#dia" onclick="dia('+position.coords.latitude+','+position.coords.longitude+');">Obtener predicción</a>'
+        content: '<a href="#dia" data-role="button" onclick="dia('+position.coords.latitude+','+position.coords.longitude+');"><img src="imagen_0.png"></a>'
       });
 
       map.setCenter(pos);

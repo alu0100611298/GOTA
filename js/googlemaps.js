@@ -22,6 +22,10 @@ function googlemaps() {
   };
   map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
+  var altura_dispositivo = $( window ).height();
+  var altura_total = altura_dispositivo * 0.75;
+  $('#map-canvas').height(altura_total);
+
 
   // This event listener will call addMarker() when the map is clicked.
   google.maps.event.addListener(map, 'click', function(event) {
@@ -44,7 +48,7 @@ function addMarker(location) {
     map: map
   });
   var infowindow = new google.maps.InfoWindow({
-	content: '<a href="#dia" onclick="dia('+ location.lat() +','+ location.lng() +');">Obtener predicción</a>'
+	content: '<a href="#dia" onclick="dia('+ location.lat() +','+ location.lng() +');"><img src="imagen_0.png"></a>'
   });
   infowindow.open(map,marker);
     

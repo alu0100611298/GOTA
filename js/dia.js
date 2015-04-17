@@ -1,4 +1,23 @@
 function dia(latitud, longitud){
+
+	var url = host + "forecast_info/";
+	var ultima_fecha;
+	$.getJSON( url, function( data ) {
+	var ultima_prediccion;
+	var fechas = [];
+	//Meto las fechas de las predicciones en el arry de fechas
+	for (key in data){
+	  fechas.push(key);
+	}
+	//Ordeno el array
+	fechas.sort();
+	//Le doi la vuelta la úlima es la primera
+	fechas.reverse();
+	ultima_prediccion = fechas[0];
+	//alert(ultima_prediccion);
+	ultima_fecha = data[ultima_prediccion][0]["fecha"];
+	
+
 	var time = new Date();
 	var dia = time.getDate();
 	var mes = time.getMonth() + 1;
@@ -6,7 +25,9 @@ function dia(latitud, longitud){
 	var hora = time.getHours();
 	dia = dia - 1;
 	var Zona = zona(latitud,longitud);
-	var url = host + 'variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+año+''+addZero(mes)+''+addZero(dia)+'';
+	
+	//var url = host + 'variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+año+''+addZero(mes)+''+addZero(dia)+'';
+	url = host + 'variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+ultima_fecha+'';
 	//alert(url);
 	$.getJSON( url, function( data ) {
 		$("#hoy").empty();
@@ -26,10 +47,12 @@ function dia(latitud, longitud){
 				lluvia = (data["rain"]["values"][i]).toFixed(2);
 			}
 			nubosidad = Math.floor((Math.random() * 4));
-			$("#hoy").append("<li class='dia'><a href='#hora'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h "+obtener_direccion(direccion)+"</p><p>"+lluvia+" mm/h</p></a></li>"); 
+			//$("#hoy").append("<li class='dia'><a href='#hora'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h "+obtener_direccion(direccion)+"</p><p>"+lluvia+" mm/h</p></a></li>");
+			$("#hoy").append("<li class='dia'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h "+obtener_direccion(direccion)+"</p><p>"+lluvia+" mm/h</p></li>");  
 		}
 
 		$('#hoy').listview('refresh');
+	});
 	});
 }
 
