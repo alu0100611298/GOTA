@@ -3,57 +3,69 @@ function dia(latitud, longitud){
 	var url = host + "forecast_info/";
 	var ultima_fecha;
 	$.getJSON( url, function( data ) {
-	var ultima_prediccion;
-	var fechas = [];
-	//Meto las fechas de las predicciones en el arry de fechas
-	for (key in data){
-	  fechas.push(key);
-	}
-	//Ordeno el array
-	fechas.sort();
-	//Le doi la vuelta la úlima es la primera
-	fechas.reverse();
-	ultima_prediccion = fechas[0];
-	//alert(ultima_prediccion);
-	ultima_fecha = data[ultima_prediccion][0]["fecha"];
-	
-
-	var time = new Date();
-	var dia = time.getDate();
-	var mes = time.getMonth() + 1;
-	var año = time.getFullYear();
-	var hora = time.getHours();
-	dia = dia - 1;
-	var Zona = zona(latitud,longitud);
-	
-	//var url = host + 'variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+año+''+addZero(mes)+''+addZero(dia)+'';
-	url = host + 'variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+ultima_fecha+'';
-	//alert(url);
-	$.getJSON( url, function( data ) {
-		$("#hoy").empty();
-		$("#tu_lugar").text(data["lugar"]);
-		var tam = data["winds"]["dates"].length;
-		for (i = hora; i < tam; i++) {
-			//alert(i);
-			var hour = data["winds"]["dates"][i];
-			var intesidad = (data["winds"]["intensity"][i]).toFixed(2);
-			var direccion = data["winds"]["direction"][i];
-			var temperatura = (data["temper"]["values"][i]).toFixed(2);
-			//La lluvia dividida entre 3 dado que son cada 3 horas
-			var lluvia = "";
-			if(! (data["rain"]["values"][i])){
-				lluvia = "No está definida";
-			}else{
-				lluvia = (data["rain"]["values"][i]).toFixed(2);
-			}
-			nubosidad = Math.floor((Math.random() * 4));
-			//$("#hoy").append("<li class='dia'><a href='#hora'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h "+obtener_direccion(direccion)+"</p><p>"+lluvia+" mm/h</p></a></li>");
-			$("#hoy").append("<li class='dia'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h "+obtener_direccion(direccion)+"</p><p>"+lluvia+" mm/h</p></li>");  
+		var ultima_prediccion;
+		var fechas = [];
+		//Meto las fechas de las predicciones en el arry de fechas
+		for (key in data){
+		  fechas.push(key);
 		}
+		//Ordeno el array
+		fechas.sort();
+		//Le doi la vuelta la úlima es la primera
+		fechas.reverse();
+		ultima_prediccion = fechas[0];
+		//alert(ultima_prediccion);
+		ultima_fecha = data[ultima_prediccion][0]["fecha"];
+		
 
-		$('#hoy').listview('refresh');
-	});
-	});
+		var time = new Date();
+		var dia = time.getDate();
+		var mes = time.getMonth() + 1;
+		var año = time.getFullYear();
+		var hora = time.getHours();
+		dia = dia - 1;
+		var Zona = zona(latitud,longitud);
+		
+		//var url = host + 'variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+año+''+addZero(mes)+''+addZero(dia)+'';
+		url = host + 'variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+ultima_fecha+'';
+		//alert(url);
+		$.getJSON( url, function( data ) {
+			$("#hoy").empty();
+			$("#tu_lugar").text(data["lugar"]);
+			var tam = data["winds"]["dates"].length;
+			for (i = hora; i < tam; i++) {
+				//alert(i);
+				var hour = data["winds"]["dates"][i];
+				var intesidad = (data["winds"]["intensity"][i]).toFixed(2);
+				var direccion = data["winds"]["direction"][i];
+				var temperatura = (data["temper"]["values"][i]).toFixed(2);
+				//La lluvia dividida entre 3 dado que son cada 3 horas
+				var lluvia = "";
+				if(! (data["rain"]["values"][i])){
+					lluvia = "No está definida";
+				}else{
+					lluvia = (data["rain"]["values"][i]).toFixed(2);
+				}
+				nubosidad = Math.floor((Math.random() * 4));
+				//$("#hoy").append("<li class='dia'><a href='#hora'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h "+obtener_direccion(direccion)+"</p><p>"+lluvia+" mm/h</p></a></li>");
+				$("#hoy").append("<li class='dia'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h "+obtener_direccion(direccion)+"</p><p>"+lluvia+" mm/h</p></li>");  
+			}
+
+			$('#hoy').listview('refresh');
+		})
+		.fail(function( jqxhr, textStatus, error ) {
+			var err = textStatus + ", " + error;
+			console.log( "Request Failed: " + err );
+			alert("No se pudo conectar con el servidor, intentelo más tarde.");
+			$.mobile.navigate( "#pageone" );
+		});
+	})
+	.fail(function( jqxhr, textStatus, error ) {
+      var err = textStatus + ", " + error;
+      console.log( "Request Failed: " + err );
+      alert("No se pudo conectar con el servidor, intentelo más tarde.");
+      $.mobile.navigate( "#pageone" );
+  	});
 }
 
 function obtener_direccion(direction){

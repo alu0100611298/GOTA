@@ -113,6 +113,13 @@ function mapas(){
       //Cambio el atributo del input radio por el salto correspondiente a la variable
       $("#points").attr("step", step);
     });
+  })
+  //Error de conexion con el servidor
+  .fail(function( jqxhr, textStatus, error ) {
+      var err = textStatus + ", " + error;
+      console.log( "Request Failed: " + err );
+      alert("No se pudo conectar con el servidor, intentelo más tarde.");
+      $.mobile.navigate( "#pageone" );
   });
 }
 
