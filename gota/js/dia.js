@@ -32,21 +32,15 @@ function dia(latitud, longitud){
 		$.getJSON( url, function( data ) {
 			$("#hoy").empty();
 			$("#tu_lugar").text(data["lugar"]);
-			var tam = data["winds"]["dates"].length;
+			var tam = data["dates"].length;
 			for (i = hora; i < tam; i++) {
 				//alert(i);
-				var hour = data["winds"]["dates"][i];
+				var hour = data["dates"][i];
 				var intesidad = (data["winds"]["intensity"][i]).toFixed(2);
 				var direccion = data["winds"]["direction"][i];
 				var temperatura = (data["temper"]["values"][i]).toFixed(2);
-				//La lluvia dividida entre 3 dado que son cada 3 horas
-				var lluvia = "";
-				if(! (data["rain"]["values"][i])){
-					lluvia = "No está definida";
-				}else{
-					lluvia = (data["rain"]["values"][i]).toFixed(2);
-				}
-				nubosidad = Math.floor((Math.random() * 4));
+				var lluvia = (data["rain"]["values"][i]).toFixed(2);
+				var nubosidad = (data["cloud"]["values"][i]).toFixed(0);
 				//$("#hoy").append("<li class='dia'><a href='#hora'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h "+obtener_direccion(direccion)+"</p><p>"+lluvia+" mm/h</p></a></li>");
 				$("#hoy").append("<li class='dia'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h "+obtener_direccion(direccion)+"</p><p>"+lluvia+" mm/h</p></li>");  
 			}

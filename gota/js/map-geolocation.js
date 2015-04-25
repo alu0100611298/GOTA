@@ -20,7 +20,7 @@ function map_geolocation() {
       mapOptions);
   var altura_dispositivo = $( window ).height();
   var altura_total = altura_dispositivo * 0.75;
-  $('#map-canvas1').height(altura_total);
+  $('#map1-canvas').height(altura_total);
 
   // Try HTML5 geolocation
   if(navigator.geolocation) {
@@ -47,8 +47,12 @@ function map_geolocation() {
 function handleNoGeolocation(errorFlag) {
   if (errorFlag) {
     var content = 'Error: The Geolocation service failed.';
+    alert("El servicio de geolocalización ha fallado, compruebe los permisos.");
+    $.mobile.navigate( "#pageone" );
   } else {
     var content = 'Error: Your browser doesn\'t support geolocation.';
+    alert("Tu navegador no soporta la geolocalización.");
+    $.mobile.navigate( "#pageone" );
   }
 
   var options = {

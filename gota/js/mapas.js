@@ -25,8 +25,8 @@ function mapas(){
     select_native_1 = fechas[0];
     ultima_prediccion = select_native_1;
     $("#select-native-1").val(select_native_1);
-    for (key in data[select_native_1][0]["meteograma"]){
-      $("#select-native-2").append("<option value='"+ data[select_native_1][0]["meteograma"][key] +"'>" + data[select_native_1][0]["meteograma"][key] + "</option>"); 
+    for (key in data[select_native_1][0]["dom_desc"]){
+      $("#select-native-2").append("<option value='"+ data[select_native_1][0]["meteograma"][key] +"'>" + data[select_native_1][0]["dom_desc"][key] + "</option>"); 
     }
     for (key in data[select_native_1][0]["parametrizaciones"]){
       $("#select-native-3").append("<option value='"+ data[select_native_1][0]["parametrizaciones"][key] +"'>" + data[select_native_1][0]["parametrizaciones"][key] + "</option>"); 
@@ -46,7 +46,7 @@ function mapas(){
         $('#select-native-3').empty();
         $('#select-native-4').empty();
         for (key in data[select_native_1][0]["meteograma"]){
-          $("#select-native-2").append("<option value='"+ data[select_native_1][0]["meteograma"][key] +"'>" + data[select_native_1][0]["meteograma"][key] + "</option>"); 
+          $("#select-native-2").append("<option value='"+ data[select_native_1][0]["meteograma"][key] +"'>" + data[select_native_1][0]["dom_desc"][key] + "</option>"); 
           //alert(key);
         }
         $('#select-native-2').selectmenu('refresh');
@@ -81,7 +81,7 @@ function mapas(){
           select_native_1 = fechas[index - 1];
         }
       }
-      var imagen = host + "media/demonio/"+data[select_native_1][0]["fotos_url"]+"zona"+meteograma+"/"+parametrizaciones+"/"+variables+"/"+valor+".png";
+      var imagen = host + "media/demonio/imagenes/"+data[select_native_1][0]["fecha"]+"/zona"+meteograma+"/"+parametrizaciones+"/"+variables+"/"+valor+".png";
       $("#url").text(imagen);
       $("#hora").text("Fecha: "+select_native_1+" Hora: "+hora+":00");
       $("#image").attr("src", imagen);
@@ -102,7 +102,7 @@ function mapas(){
       
       //alert(data[select_native_1][0]["fotos_url"]);
       valor = addZero(valor);
-      var imagen = host + "media/demonio/"+data[select_native_1][0]["fotos_url"]+"zona"+meteograma+"/"+parametrizaciones+"/"+variables+"/"+valor+".png";
+      var imagen = host + "media/demonio/imagenes/"+data[select_native_1][0]["fecha"]+"/zona"+meteograma+"/"+parametrizaciones+"/"+variables+"/"+valor+".png";
       $("#url").text(imagen);
       $("#hora").text("Fecha: "+select_native_1+" Hora: "+valor+":00");
       $("#image").attr("src", imagen);
