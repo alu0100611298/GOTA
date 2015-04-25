@@ -1,3 +1,3 @@
 # GOTA
 Aplicación android con Phonegap
-http://banot.etsii.ull.es/alu4213/proyecto/index.html
+http://alu0100611298.github.io/GOTA/gota/
