@@ -1,6 +1,7 @@
 function dia(latitud, longitud){
 
 	var url = host + "forecast_info/";
+	url = "http://banot.etsii.ull.es/alu4213/gota/json.php";
 	var ultima_fecha;
 	$.getJSON( url, function( data ) {
 		var ultima_prediccion;
@@ -27,7 +28,11 @@ function dia(latitud, longitud){
 		var Zona = zona(latitud,longitud);
 		
 		//var url = host + 'variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+año+''+addZero(mes)+''+addZero(dia)+'';
-		url = host + 'variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+ultima_fecha+'';
+		url = host + '/variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+ultima_fecha+'';
+		//alert(url);
+		host = "http://banot.etsii.ull.es/alu4213/gota/url.php";
+		//var url = host + 'variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+año+''+addZero(mes)+''+addZero(dia)+'';
+		url = host + '/variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+ultima_fecha+'';
 		//alert(url);
 		$.getJSON( url, function( data ) {
 			$("#hoy").empty();
