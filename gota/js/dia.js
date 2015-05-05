@@ -41,13 +41,13 @@ function dia(latitud, longitud){
 			for (i = hora; i < tam; i++) {
 				//alert(i);
 				var hour = data["dates"][i];
-				var intesidad = (data["winds"]["intensity"][i]).toFixed(2);
+				var intesidad = (data["winds"]["intensity"][i]).toFixed(1);
 				var direccion = data["winds"]["direction"][i];
-				var temperatura = (data["temper"]["values"][i]).toFixed(2);
-				var lluvia = (data["rain"]["values"][i]).toFixed(2);
+				var temperatura = (data["temper"]["values"][i]).toFixed(1);
+				var lluvia = (data["rain"]["values"][i]).toFixed(1);
 				var nubosidad = (data["cloud"]["values"][i]).toFixed(0);
 				//$("#hoy").append("<li class='dia'><a href='#hora'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h "+obtener_direccion(direccion)+"</p><p>"+lluvia+" mm/h</p></a></li>");
-				$("#hoy").append("<li class='dia'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h "+obtener_direccion(direccion)+"</p><p>"+lluvia+" mm/h</p></li>");  
+				$("#hoy").append("<li class='dia'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><h3>"+intesidad+" km/h "+obtener_direccion(direccion)+"</h3><h3>"+lluvia+" mm/h</h3></li>");  
 			}
 
 			$('#hoy').listview('refresh');

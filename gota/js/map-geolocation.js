@@ -31,7 +31,7 @@ function map_geolocation() {
       var infowindow = new google.maps.InfoWindow({
         map: map,
         position: pos,
-        content: '<a href="#dia" data-role="button" onclick="dia('+position.coords.latitude+','+position.coords.longitude+');"><img src="imagen_0.png"></a>'
+        content: '<a href="#dia" data-role="button" onclick="dia('+position.coords.latitude+','+position.coords.longitude+');"><img src="imagen_0.png"><br><h1>Haz click para ver<br>la predicción</h1></a>'
       });
 
       map.setCenter(pos);

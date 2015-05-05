@@ -44,7 +44,7 @@ function mapas(){
       $("#select-native-1").append("<option value='"+ fechas[key] +"'>" + fechas[key] + "</option>");
     }
     select_native_1 = fechas[0];
-    ultima_prediccion = select_native_1;
+    //ultima_prediccion = select_native_1;
     $("#select-native-1").val(select_native_1);
     for (key in data[select_native_1][0]["dom_desc"]){
       $("#select-native-2").append("<option value='"+ data[select_native_1][0]["meteograma"][key] +"'>" + data[select_native_1][0]["dom_desc"][key] + "</option>"); 
@@ -102,12 +102,6 @@ function mapas(){
       if(hora > 23){
         hora = hora - 24;
         d.setDate(d.getDate() + 1);
-        //d = d + 1;
-        //Si pasa un dia y no es la ultima predicción
-        if(ultima_prediccion != select_native_1){
-          var index = fechas.indexOf(select_native_1);
-          select_native_1 = fechas[index - 1];
-        }
       }
       hora  = addZero(hora);
       var dia = addZero(d.getDate());
@@ -116,7 +110,7 @@ function mapas(){
       host = "http://banot.etsii.ull.es/alu4213/gota/img.php";
       var imagen = host + "/media/demonio/imagenes/"+data[select_native_1][0]["fecha"]+"/zona"+meteograma+"/ensemble/"+variables+"/"+año+""+mes+""+dia+""+hora+"00.png";
       //alert(imagen);
-      //$("#url").text(imagen);
+      $("#url").text(imagen);
       $("#hora").text("Fecha: "+año+""+mes+""+dia+" Hora: "+hora+":00");
       $("#image").attr("src", imagen);
       //var altura_dispositivo = $( window ).width();
@@ -126,7 +120,6 @@ function mapas(){
         //$("#image").attr("src", "http://www.aemet.es/imagenes_d/eltiempo/observacion/satelite/" + año + "" + mes + "" + day + "" + valor + "00_s93g.gif");
     });
     $("#addMap").click(function(){
-      var valor = $("#points").val();
       var select_native_1 = $('#select-native-1').val();
       var meteograma = $('#select-native-2').val();
       var parametrizaciones = $('#select-native-3').val();
@@ -134,7 +127,7 @@ function mapas(){
       
       //alert(data[select_native_1][0]["fotos_url"]);
       //valor = addZero(valor);
-      var hora = valor;
+      var hora = 0;
       var d = new Date();
       var dia = data[select_native_1][0]["fecha"];
       d.setFullYear(dia.substring(0, 4),dia.substring(4, 6),dia.substring(6, 8));
@@ -144,15 +137,10 @@ function mapas(){
       if(hora > 23){
         hora = hora - 24;
         d.setDate(d.getDate() + 1);
-        //d = d + 1;
-        //Si pasa un dia y no es la ultima predicción
-        if(ultima_prediccion != select_native_1){
-          var index = fechas.indexOf(select_native_1);
-          select_native_1 = fechas[index - 1];
-        }
       }
       hora = d.getHours();
-      $("#points").val(hora);
+      $("#points").attr("value", hora);
+      alert($("#points").val())
       hora  = addZero(hora);
       var dia = addZero(d.getDate());
       var mes = addZero(d.getMonth());
@@ -160,7 +148,7 @@ function mapas(){
       host = "http://banot.etsii.ull.es/alu4213/gota/img.php";
       var imagen = host + "/media/demonio/imagenes/"+data[select_native_1][0]["fecha"]+"/zona"+meteograma+"/ensemble/"+variables+"/"+año+""+mes+""+dia+""+hora+"00.png";
       //alert(imagen);
-      //$("#url").text(imagen);
+      $("#url").text(imagen);
       $("#hora").text("Fecha: "+año+""+mes+""+dia+" Hora: "+hora+":00");
       $("#image").attr("src", imagen);
       //Recojo el indice de la variable

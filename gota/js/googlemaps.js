@@ -48,7 +48,7 @@ function addMarker(location) {
     map: map
   });
   var infowindow = new google.maps.InfoWindow({
-	content: '<a href="#dia" onclick="dia('+ location.lat() +','+ location.lng() +');"><img src="imagen_0.png"></a>'
+	content: '<a href="#dia" onclick="dia('+ location.lat() +','+ location.lng() +');"><img src="imagen_0.png"><br><h1>Haz click para ver<br>la predicción</h1></a>'
   });
   infowindow.open(map,marker);
     
