@@ -1,9 +1,17 @@
 function dia(latitud, longitud){
-
+	$("#hoy").empty();
 	var url = host + "forecast_info/";
 	url = "http://banot.etsii.ull.es/alu4213/gota/json.php";
 	var ultima_fecha;
+
 	$.getJSON( url, function( data ) {
+		$.mobile.loading( "show", {
+            text: "Cargando",
+            textVisible: true,
+            theme: "b",
+            textonly: false,
+            html: ""
+          });
 		var ultima_prediccion;
 		var fechas = [];
 		//Meto las fechas de las predicciones en el arry de fechas
@@ -35,7 +43,6 @@ function dia(latitud, longitud){
 		url = host + '/variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+ultima_fecha+'';
 		//alert(url);
 		$.getJSON( url, function( data ) {
-			$("#hoy").empty();
 			$("#tu_lugar").text(data["lugar"]);
 			var tam = data["dates"].length;
 			for (i = hora; i < tam; i++) {
@@ -47,10 +54,11 @@ function dia(latitud, longitud){
 				var lluvia = (data["rain"]["values"][i]).toFixed(1);
 				var nubosidad = (data["cloud"]["values"][i]).toFixed(0);
 				//$("#hoy").append("<li class='dia'><a href='#hora'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h "+obtener_direccion(direccion)+"</p><p>"+lluvia+" mm/h</p></a></li>");
-				$("#hoy").append("<li class='dia'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><h3>"+intesidad+" km/h "+obtener_direccion(direccion)+"</h3><h3>"+lluvia+" mm/h</h3></li>");  
+				$("#hoy").append("<li class='dia'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º <img class='icono' src='thermometer.png'></h3><h3>"+intesidad+" km/h <img class='icono' src='wind.png'> "+obtener_direccion(direccion)+"</h3><h3>"+lluvia+" mm/h <img class='icono' src='gota.png'></h3></li>");  
 			}
 
 			$('#hoy').listview('refresh');
+			$.mobile.loading( "hide" );
 		})
 		.fail(function( jqxhr, textStatus, error ) {
 			var err = textStatus + ", " + error;

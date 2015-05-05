@@ -110,7 +110,7 @@ function mapas(){
       host = "http://banot.etsii.ull.es/alu4213/gota/img.php";
       var imagen = host + "/media/demonio/imagenes/"+data[select_native_1][0]["fecha"]+"/zona"+meteograma+"/ensemble/"+variables+"/"+año+""+mes+""+dia+""+hora+"00.png";
       //alert(imagen);
-      $("#url").text(imagen);
+      //$("#url").text(imagen);
       $("#hora").text("Fecha: "+año+""+mes+""+dia+" Hora: "+hora+":00");
       $("#image").attr("src", imagen);
       //var altura_dispositivo = $( window ).width();
@@ -140,7 +140,7 @@ function mapas(){
       }
       hora = d.getHours();
       $("#points").attr("value", hora);
-      alert($("#points").val())
+      //alert($("#points").val());
       hora  = addZero(hora);
       var dia = addZero(d.getDate());
       var mes = addZero(d.getMonth());
@@ -148,7 +148,7 @@ function mapas(){
       host = "http://banot.etsii.ull.es/alu4213/gota/img.php";
       var imagen = host + "/media/demonio/imagenes/"+data[select_native_1][0]["fecha"]+"/zona"+meteograma+"/ensemble/"+variables+"/"+año+""+mes+""+dia+""+hora+"00.png";
       //alert(imagen);
-      $("#url").text(imagen);
+      //$("#url").text(imagen);
       $("#hora").text("Fecha: "+año+""+mes+""+dia+" Hora: "+hora+":00");
       $("#image").attr("src", imagen);
       //Recojo el indice de la variable
