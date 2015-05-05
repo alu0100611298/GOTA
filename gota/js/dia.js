@@ -8,7 +8,7 @@ function dia(latitud, longitud){
 		$.mobile.loading( "show", {
             text: "Cargando",
             textVisible: true,
-            theme: "b",
+            theme: "c",
             textonly: false,
             html: ""
           });
