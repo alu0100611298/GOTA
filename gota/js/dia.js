@@ -5,13 +5,13 @@ function dia(latitud, longitud){
 	var ultima_fecha;
 
 	$.getJSON( url, function( data ) {
-		$.mobile.loading( "show", {
-            text: "Cargando",
-            textVisible: true,
-            theme: "c",
-            textonly: false,
-            html: ""
-          });
+	$.mobile.loading( "show", {
+        text: "Cargando",
+        textVisible: true,
+        theme: "c",
+        textonly: false,
+        html: ""
+      });
 		var ultima_prediccion;
 		var fechas = [];
 		//Meto las fechas de las predicciones en el arry de fechas
@@ -53,8 +53,9 @@ function dia(latitud, longitud){
 				var temperatura = (data["temper"]["values"][i]).toFixed(1);
 				var lluvia = (data["rain"]["values"][i]).toFixed(1);
 				var nubosidad = (data["cloud"]["values"][i]).toFixed(0);
+				var brujula = obtener_direccion(direccion);
 				//$("#hoy").append("<li class='dia'><a href='#hora'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h "+obtener_direccion(direccion)+"</p><p>"+lluvia+" mm/h</p></a></li>");
-				$("#hoy").append("<li class='dia'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º <img class='icono' src='thermometer.png'></h3><h3>"+intesidad+" km/h <img class='icono' src='wind.png'> "+obtener_direccion(direccion)+"</h3><h3>"+lluvia+" mm/h <img class='icono' src='gota.png'></h3></li>");  
+				$("#hoy").append("<li class='dia'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3><img class='icono' src='thermometer.png'> "+temperatura+"º</h3><h3><img class='icono' src='"+brujula+".png'> "+brujula+": "+intesidad+" km/h </h3><h3><img class='icono' src='gota.png'> "+lluvia+" mm/h </h3></li>");  
 			}
 
 			$('#hoy').listview('refresh');
