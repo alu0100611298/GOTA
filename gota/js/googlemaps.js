@@ -48,11 +48,11 @@ function addMarker(location) {
     map: map
   });
   var infowindow = new google.maps.InfoWindow({
-	content: '<a href="#dia" onclick="dia('+ location.lat() +','+ location.lng() +');"><img src="imagen_0.png"><br><h1>Haz click para ver<br>la predicción</h1></a>'
+	content: '<button style="width: 100%;"  href="#dia" onclick="dia('+ location.lat() +','+ location.lng() +');"><br><h1>Ver</h1></button><button style="width: 100%;" href="#" onclick="favoritos_add('+ location.lat() +','+ location.lng() +');"><br><h1>Hacer favorito</h1></button>'
   });
   infowindow.open(map,marker);
-    
-    
+  //dia(location.lat(),location.lng());
+  //$.mobile.navigate( "#dia" );    
   markers.push(marker);
 }
         

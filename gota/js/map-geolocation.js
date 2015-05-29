@@ -31,9 +31,10 @@ function map_geolocation() {
       var infowindow = new google.maps.InfoWindow({
         map: map,
         position: pos,
-        content: '<a href="#dia" data-role="button" onclick="dia('+position.coords.latitude+','+position.coords.longitude+');"><img src="imagen_0.png"><br><h1>Haz click para ver<br>la predicción</h1></a>'
+        content: '<button style="width: 100%;" href="#dia" data-role="button" onclick="dia('+position.coords.latitude+','+position.coords.longitude+');"><br><h1>Ver</h1></button><button style="width: 100%;" href="#" onclick="favoritos_add('+ position.coords.latitude +','+position.coords.longitude+');"><br><h1>Hacer favorito</h1></button>'
       });
-
+      //dia(position.coords.latitude,position.coords.longitude);
+      //$.mobile.navigate( "#dia" ); 
       map.setCenter(pos);
     }, function() {
       handleNoGeolocation(true);

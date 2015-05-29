@@ -1,14 +1,24 @@
 var host = "http://10.209.2.98/";
          
-/*function doOnOrientationChange()
+function doOnOrientationChange()
 {
   switch(window.orientation) 
   {  
     case -90:
     case 90:
+      $("#point").addClass("point");
+      $("#image").addClass("image");
+      $("#hora").addClass("hora");
+      $("#header").addClass("hora");
+      $("#footer").addClass("hora");
       //alert('landscape');
       break; 
     default:
+      $("#point").removeClass("point");
+      $("#image").removeClass("image");
+      $("#hora").removeClass("hora");
+      $("#header").removeClass("hora");
+      $("#footer").removeClass("hora");
       //alert('portrait');
       break; 
   }
@@ -18,7 +28,6 @@ window.addEventListener('orientationchange', doOnOrientationChange);
 
 // Initial execution if needed
 doOnOrientationChange();
-*/
 function mapas(){
   var url = host + "forecast_info/";
   url = "http://banot.etsii.ull.es/alu4213/gota/json.php";

@@ -39,13 +39,13 @@
   <link rel="stylesheet" href="css/index.css" />
 </head> 
 <body> 
-
+<!--Comienzo de la primera pagina, contiene el menu principal de la aplicación-->
 <div data-role="page" id="pageone" class="page">
-
+  <!--Cabecera de la página-->
   <div data-role="header" data-position="fixed">
     <h1>GOTA</h1>
-  </div><!-- /header -->
-
+  </div><!-- /Cabecera -->
+  <!-- Contenido de la página, contiene una lista con dos enlaces a otras páginas -->
   <div data-role="content">
   	<ul data-role="listview" data-inset="true">
       <li data-role="list-divider">¿Qué desea ver?</li>
@@ -64,8 +64,8 @@
         </a>
       </li>
     </ul>
-  </div><!-- /content -->
-
+  </div><!-- /contenido -->
+  <!-- Pie contiene tres botones con accesos directos-->
   <div data-role="footer" data-position="fixed">
     <div data-role="navbar">
       <ul>
@@ -74,21 +74,23 @@
         <li><a href="#lugar" data-icon="sol">Tiempo</a></li>
       </ul>
     </div>
-  </div>
+  </div><!-- /pie -->
 
-</div><!-- /page -->
-
+</div><!-- /página -->
+<!-- Pagina con el menú de selección de los mapas-->
 <div data-role="page" id="galerias" class="page">
-
+  <!-- Cabecera -->
   <div data-role="header" data-position="fixed">
+    <!-- El atributo data-rel back, permite regresar a la página anterior-->
     <a href="#" data-role="button" data-rel="back">Back</a>
-    <h1>Predicción para tu lugar</h1>
-  </div><!-- /header -->
-
+    <h1>Selecciona un mapa</h1>
+  </div><!-- /Cabecera -->
+  <!-- Cuerpo -->
   <div data-role="content">
     <ul data-role="listview" data-inset="true" id="refrescar">
       <li data-role="list-divider">Mapas de:</li>
       <li>
+        <!-- Enlace a la sigiente página, que muestra los mapas-->
         <a href="#mostrar_mapa" data-transition="slide" id="addMap">
         <img src="world.png">
         <h2>Mostrar Mapa</h2>
@@ -96,6 +98,7 @@
         </a>
       </li>
       <li>
+        <!-- formulario de seleccion de fecha, región y variable -->
         <form>
               <label for="select-native-1">Fecha</label>
               <select name="select-native-1" id="select-native-1">
@@ -109,8 +112,8 @@
         </form>
       </li>
     </ul>
-  </div><!-- /content -->
-
+  </div><!-- /contenido -->
+  <!-- pie -->
   <div data-role="footer" data-position="fixed">
     <div data-role="navbar">
       <ul>
@@ -120,28 +123,29 @@
       </ul>
     </div>
   </div>
-
-</div><!-- /page -->
-
+  <!-- pie -->
+</div><!-- /página -->
+<!-- página donde se visualizan los diferentes mapas-->
 <div data-role="page" id="mostrar_mapa" data-theme="a">
-
-  <div data-role="header" data-position="fixed">
+  <!-- header -->
+  <div data-role="header" data-position="fixed" id="header">
     <a href="#" data-role="button" data-rel="back">Back</a>
     <h1>Predicción para tu lugar</h1>
   </div><!-- /header -->
-
+  <!-- El el cuerpo hay dos elementos un input donde podemos seleccionar las horas y una imagen que cambia segun la selección -->
   <div data-role="content">
     <div data-role="fieldcontain" id="point">
       <p id="url"></p>
       <label for="points" id="hora">Hora:</label>
+      <!-- El input es un slider que comienza en 0 y acaba en 42, saltando de uno en uno-->
       <input type="range" name="points" id="points" value="0" min="0" max="42" step="1" />
     </div>
     <div>
       <img src='' alt='' id="image">    
     </div>
   </div><!-- /content -->
-  
-  <div data-role="footer" data-position="fixed">
+  <!-- /footer -->
+  <div data-role="footer" data-position="fixed" id="footer">
     <div data-role="navbar">
       <ul>
         <li><a href="#" data-role="button" data-icon="arrow-l" data-rel="back">Volver</a></li>
@@ -150,7 +154,7 @@
       </ul>
     </div>
   </div>
-
+  <!-- /footer -->
 </div><!-- /page -->
 
 <div data-role="page" id="lugar" class="page">
@@ -175,6 +179,13 @@
         <img src="map1.png">
         <h2>Seleccionar</h2>
         <p>Seleccionar en el mapa la ubicación</p>
+        </a>
+      </li>
+      <li>
+        <a href="#favoritos" data-transition="slide" onclick="favoritos();">
+        <img src="heart.png">
+        <h2>Favoritos</h2>
+        <p>Guarda tus localizaciones favoritas</p>
         </a>
       </li>
     </ul>
@@ -243,30 +254,15 @@
       </div>
     </div>
 
-    <div data-role="page" data-theme="" id="hora" class="page">
+    <div data-role="page" data-theme="" id="favoritos" class="page">
 
       <div data-role="header" data-position="fixed">
         <a href="#" data-role="button" data-rel="back">Back</a>
-        <h1>Hora</h1>
+        <h1>Favoritos</h1>
       </div><!-- /header -->
 
       <div data-role="content">
-        <ul data-role="listview" data-inset="true" id="">
-          <li data-role="list-divider">Hora:</li>
-          <li>
-            <img src='cloud.dark.rain.png'>
-            <h1>Lluvia</h1>
-            <h3>Temperatura: 11º</h3>
-            <p>Sensación térmica: 11º</p>
-            <h3>Viento: Nordeste, 18 km/h</h3>
-            <p>Rachas: 54 km/h</p>
-            <img id="viento" src='cloud.dark.rain.png'>
-            <h3>Lluvia: 0.1 mm</h3>
-            <h3>Nubes: 73%</h3>
-            <p>Tormenta: 0% probabilidad</p>
-            <h3>Humedad: 70%</h3>
-            <p>Presión atmosférica: 1026 hPa</p>
-          </li>
+        <ul data-role="listview" data-inset="true" id="favorito">
         </ul>
       </div><!-- /content -->
 
