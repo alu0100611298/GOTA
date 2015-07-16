@@ -1,7 +1,4 @@
-// In the following example, markers appear when the user clicks on the map.
-// The markers are stored in an array.
-// The user can then click an option to hide, show or delete the markers.
-
+// Fichero para selección de la hubicación en el mapa
 function loadScript()
 {
   var script = document.createElement("script");
@@ -12,7 +9,7 @@ function loadScript()
 
 var map;
 var markers = [];
-
+// Centramos en mapa en tçTenerife
 function googlemaps() {
   var tenerife = new google.maps.LatLng(28.2932285, -16.522718);
   var mapOptions = {
@@ -48,11 +45,10 @@ function addMarker(location) {
     map: map
   });
   var infowindow = new google.maps.InfoWindow({
+    // Ventana con la visualización de la variable y añadir a favorito
 	content: '<button style="width: 100%;"  href="#dia" onclick="dia('+ location.lat() +','+ location.lng() +');"><br><h1>Ver</h1></button><button style="width: 100%;" href="#" onclick="favoritos_add('+ location.lat() +','+ location.lng() +');"><br><h1>Hacer favorito</h1></button>'
   });
-  infowindow.open(map,marker);
-  //dia(location.lat(),location.lng());
-  //$.mobile.navigate( "#dia" );    
+  infowindow.open(map,marker);    
   markers.push(marker);
 }
         

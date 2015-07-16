@@ -1,11 +1,16 @@
+// Fichero que contiene las funciones de la evolución temporal
+//Se le pasa una locaclización y se carga su predicción temporal
 function dia(latitud, longitud){
+	// Pasamos a la página dia
 	$.mobile.navigate( "#dia" );
+	// Vaciamos el listado
 	$("#hoy").empty();
-	var url = host + "forecast_info/";
-	url = "http://banot.etsii.ull.es/alu4213/gota/json.php";
+	// La dirección donde esta el fichero
+	var url = "http://banot.etsii.ull.es/alu4213/gota/json.php";
 	var ultima_fecha;
-
+	// Obtenemos el JSON
 	$.getJSON( url, function( data ) {
+	// Simbolo de carga
 	$.mobile.loading( "show", {
         text: "Cargando",
         textVisible: true,
@@ -15,7 +20,7 @@ function dia(latitud, longitud){
       });
 		var ultima_prediccion;
 		var fechas = [];
-		//Meto las fechas de las predicciones en el arry de fechas
+		//Meto las fechas de las predicciones en el array de fechas
 		for (key in data){
 		  fechas.push(key);
 		}
@@ -27,29 +32,29 @@ function dia(latitud, longitud){
 		//alert(ultima_prediccion);
 		ultima_fecha = data[ultima_prediccion][0]["fecha"];
 		
-
+		// Obtenemos la fecha, dia, mes y hora
 		var time = new Date();
 		var dia = time.getDate();
 		var mes = time.getMonth() + 1;
 		var año = time.getFullYear();
 		var hora = time.getHours();
 		dia = dia - 1;
+		// Comprobamos a que zona pertenece
 		var Zona = zona(latitud,longitud);
-		
-		//var url = host + 'variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+año+''+addZero(mes)+''+addZero(dia)+'';
+		// Contruimos la URL de la peticion
 		url = host + '/variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+ultima_fecha+'';
-		//alert(url);
+		// Dirección del servidor puente
 		host = "http://banot.etsii.ull.es/alu4213/gota/url.php";
-		//var url = host + 'variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+año+''+addZero(mes)+''+addZero(dia)+'';
+		// Peticion con la URL del servidor puente mas la consulta
 		url = host + '/variables_request/zona'+Zona+'/'+latitud+'/'+longitud+'/'+ultima_fecha+'';
-		//alert(url);
+		// Obtenemos la predicción
 		$.getJSON( url, function( data ) {
+			// Nombre del lugar
 			$("#tu_lugar").text(data["lugar"]);
-			// Guardamos la locaclización en favoritos
-			//favoritos_add(data["lugar"],latitud,longitud);
+			// Para las horas disponibles recorremos el vector
 			var tam = data["dates"].length;
 			for (i = hora; i < tam; i++) {
-				//alert(i);
+				// Mostramos las diferentes variables
 				var hour = data["dates"][i];
 				var intesidad = (data["winds"]["intensity"][i]).toFixed(1);
 				var direccion = data["winds"]["direction"][i];
@@ -57,14 +62,16 @@ function dia(latitud, longitud){
 				var lluvia = (data["rain"]["values"][i]).toFixed(1);
 				var nubosidad = (data["cloud"]["values"][i]).toFixed(0);
 				var brujula = obtener_direccion(direccion);
-				//$("#hoy").append("<li class='dia'><a href='#hora'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3>"+temperatura+"º</h3><p>"+intesidad+" km/h "+obtener_direccion(direccion)+"</p><p>"+lluvia+" mm/h</p></a></li>");
+				// Se van introduciendo al final de la lista
 				$("#hoy").append("<li class='dia'><img src='imagen_"+nubosidad+".png'><h1>" + hour + "</h1><h3><img class='icono' src='thermometer.png'> "+temperatura+"º</h3><h3><img class='icono' src='"+brujula+".png'> "+brujula+": "+intesidad+" km/h </h3><h3><img class='icono' src='gota.png'> "+lluvia+" mm/h </h3></li>");  
 			}
-
+			// Se refresca la lista para que coja el estilo
 			$('#hoy').listview('refresh');
+			// Escondemos la carga
 			$.mobile.loading( "hide" );
 		})
 		.fail(function( jqxhr, textStatus, error ) {
+			// Mensaje de error por si falla la carga del fichero JSON
 			var err = textStatus + ", " + error;
 			console.log( "Request Failed: " + err );
 			alert("No se pudo conectar con el servidor, intentelo más tarde.");
@@ -72,13 +79,14 @@ function dia(latitud, longitud){
 		});
 	})
 	.fail(function( jqxhr, textStatus, error ) {
+	// Mensaje de error por si falla la carga del fichero JSON
       var err = textStatus + ", " + error;
       console.log( "Request Failed: " + err );
       alert("No se pudo conectar con el servidor, intentelo más tarde.");
       $.mobile.navigate( "#pageone" );
   	});
 }
-
+// Funcion que obtiene la dirección del viento segun en el grado que esté
 function obtener_direccion(direction){
 	var coordenada;
 	while(direction > 0){
@@ -112,7 +120,7 @@ function obtener_direccion(direction){
 	}
 	return coordenada;
 }
-
+// Devuelve la zona para la consulta a travez de la ubicación
 function zona(latitud,longitud){
 
 	var zona;
@@ -124,60 +132,9 @@ function zona(latitud,longitud){
 	}else if(longitud > -18.5 && longitud < -12.5 && latitud > 27.5 && latitud < 29.5){
 		var zona = 2;
 	}else{
+		// Si la zona no esta dentro del límite se devuelve un mensaje de error
 		var zona = -1;
 		alert("La zona está fuera de los límites");
 	}
 	return zona;
-}
-
-function favoritos(){
-	$("#favorito").empty();
-	/*var favoritos = '{ "favoritos" : [' +
-	'{ "lugar":"La Laguna" , "latitud":"John" , "longitud":"Doe" },' +
-	'{ "lugar":"La Orotava" , "latitud":"Anna" , "longitud":"Smith" },' +
-	'{ "lugar":"Los Cristianos" , "latitud":"Peter" , "longitud":"Jones" } ]}';
-	localStorage.setItem("favoritos", favoritos);*/
-	// Obtenemos la variable del local storage
-	var localizacion = localStorage.getItem('favoritos') || '<empty>';
-	// Convertimos la variable a JSON para trabajar con ella como array
-	var obj = JSON.parse(localizacion);
-	// Recuperamos el tamaño del objeto para poder iterar en el
-	var tam = obj["favoritos"].length;
-	for (i = 0; i < tam; i++) {
-		var lugar = obj["favoritos"][i]["lugar"];
-		var latitud = obj["favoritos"][i]["latitud"];
-		var longitud = obj["favoritos"][i]["longitud"];
-		$("#favorito").append("<li><a href='#dia' onclick='dia("+ latitud +","+ longitud +");'><img src='heart.png'><h2>"+lugar+"</h2><p>Selecciona para mostrar</p></a></li>");
-	}
-	//localStorage.clear();
-	$('#favorito').listview('refresh');
-}
-// Se añaden los favoritos a la lista
-function favoritos_add(latitud,longitud){
-	//recogemos la lista del almacenamiento local
-	var lugar = prompt("Introduzca un nombre para la localización", "localización");
-	var localizacion = localStorage.getItem('favoritos');
-	var obj = [];
-	// No hay variable almacenada se crea el array
-	if(!localizacion){
-		var favoritos = '{ "favoritos" : []}';
-		obj = JSON.parse(favoritos);
-	}else{// La variable si existe y se transforma en un objeto para trabajar
-		obj = JSON.parse(localizacion);
-	}
-	//Obtenemos el tamaño del array
-	var tam = obj["favoritos"].length;
-	// Text son los datos que vamos a guardar necesarios para mostrar el lugar
-	var text = { "lugar":lugar , "latitud":latitud , "longitud":longitud };
-	// El tamaño de la lista de favoritos es 3 si hay menos se inserta
-	if(tam < 3){
-		obj["favoritos"].unshift(text);
-	}else{ // si hay mas de 3 elementos se borra el ultimo y se inserta por delante
-		obj["favoritos"].pop();
-		obj["favoritos"].unshift(text);
-	}
-	// Se vuele a pasar el objeto a una cadena
-	var favoritos = JSON.stringify(obj);
-	// Se almacena la cadena en local
-	localStorage.setItem("favoritos", favoritos);
 }
