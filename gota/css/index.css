@@ -1,4 +1,4 @@
-#image { 
+#image{ 
 	width: 100%;
 	height: 100%;
 }
@@ -24,4 +24,15 @@
 .hora{
 	z-index: 0;
 	display: none !important;
+}
+.portrait{
+	z-index: 0;
+	display: none !important;
+}
+.ui-footer a{
+	  background-color: #C1272D !important;
+}
+.ui-footer a{
+	  color: #fff !important;
+	  text-shadow: 0 1px 0 #C1272D !important;
 }

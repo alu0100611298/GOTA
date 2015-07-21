@@ -1,7 +1,4 @@
-// Note: This example requires that you consent to location sharing when
-// prompted by your browser. If you see a blank space instead of the map, this
-// is probably because you have denied permission for location sharing.
-
+// Fichero para la geolocalización
 function loadScript1()
 {
   var script = document.createElement("script");
@@ -31,10 +28,9 @@ function map_geolocation() {
       var infowindow = new google.maps.InfoWindow({
         map: map,
         position: pos,
+        // Ventana con la visualización de la variable y añadir a favorito
         content: '<button style="width: 100%;" href="#dia" data-role="button" onclick="dia('+position.coords.latitude+','+position.coords.longitude+');"><br><h1>Ver</h1></button><button style="width: 100%;" href="#" onclick="favoritos_add('+ position.coords.latitude +','+position.coords.longitude+');"><br><h1>Hacer favorito</h1></button>'
-      });
-      //dia(position.coords.latitude,position.coords.longitude);
-      //$.mobile.navigate( "#dia" ); 
+      }); 
       map.setCenter(pos);
     }, function() {
       handleNoGeolocation(true);
@@ -44,7 +40,7 @@ function map_geolocation() {
     handleNoGeolocation(false);
   }
 }
-
+// Eventos si ocurre un error
 function handleNoGeolocation(errorFlag) {
   if (errorFlag) {
     var content = 'Error: The Geolocation service failed.';

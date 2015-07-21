@@ -1,43 +1,46 @@
-var host = "http://10.209.2.98/";
-         
+// Fichero para el modulo de los mapas de predicción
+// Eventos si el dispositivo cambia de dirección entre vertical y horizontal      
 function doOnOrientationChange()
 {
   switch(window.orientation) 
   {  
     case -90:
     case 90:
+    // Clases para el dispositivo en horizontal
       $("#point").addClass("point");
-      $("#image").addClass("image");
       $("#hora").addClass("hora");
+      $("#portrait").addClass("hora");
       $("#header").addClass("hora");
       $("#footer").addClass("hora");
-      //alert('landscape');
+      $("#image").addClass("image");
       break; 
     default:
+    // En vertical se tienen estas clases
       $("#point").removeClass("point");
-      $("#image").removeClass("image");
       $("#hora").removeClass("hora");
+      $("#portrait").removeClass("hora");
       $("#header").removeClass("hora");
       $("#footer").removeClass("hora");
-      //alert('portrait');
+      $("#image").removeClass("image");
       break; 
   }
 }
-
+// Evento para el cambio de posición
 window.addEventListener('orientationchange', doOnOrientationChange);
 
 // Initial execution if needed
 doOnOrientationChange();
 function mapas(){
-  var url = host + "forecast_info/";
-  url = "http://banot.etsii.ull.es/alu4213/gota/json.php";
-  //alert(url);
+  // URL del fichero
+  var url  "http://banot.etsii.ull.es/alu4213/gota/json.php";
   //Vaciamos la lista se va a volver a cargar
   $('#select-native-1').empty();
   $('#select-native-2').empty();
   $('#select-native-3').empty();
   $('#select-native-4').empty();
+  // Obtenemos el fichero
   $.getJSON( url, function( data ) {
+      // Imagen que muestra el dispositivo cargando
       $.mobile.loading( "show", {
         text: "Cargando",
         textVisible: true,
@@ -59,15 +62,18 @@ function mapas(){
     for (key in fechas){
       $("#select-native-1").append("<option value='"+ fechas[key] +"'>" + fechas[key] + "</option>");
     }
+    // Coloca la ultima fecha primero y la muestro
     select_native_1 = fechas[0];
-    //ultima_prediccion = select_native_1;
     $("#select-native-1").val(select_native_1);
+    // Listado de dominios
     for (key in data[select_native_1][0]["dom_desc"]){
       $("#select-native-2").append("<option value='"+ data[select_native_1][0]["meteograma"][key] +"'>" + data[select_native_1][0]["dom_desc"][key] + "</option>"); 
     }
+    // Listado de parametrizaciones
     for (key in data[select_native_1][0]["parametrizaciones"]){
       $("#select-native-3").append("<option value='"+ data[select_native_1][0]["parametrizaciones"][key] +"'>" + data[select_native_1][0]["parametrizaciones"][key] + "</option>"); 
     }
+    // Listado de variables
     for (key in data[select_native_1][0]["variables"]){
       $("#select-native-4").append("<option value='"+ data[select_native_1][0]["variables"][key] +"'>" + data[select_native_1][0]["variables"][key] + "</option>"); 
     }
@@ -76,6 +82,7 @@ function mapas(){
     $('#select-native-2').selectmenu('refresh');
     $('#select-native-3').selectmenu('refresh');
     $('#select-native-4').selectmenu('refresh');
+    // Cuando cambia la fecha volvemos a cambiar las otras variables
     $("#select-native-1").change(function(){
         var select_native_1 = $('#select-native-1').val();
         //Cambiamos la seleccion borramos las listas que vamos a volver a cargar
@@ -84,21 +91,18 @@ function mapas(){
         $('#select-native-4').empty();
         for (key in data[select_native_1][0]["meteograma"]){
           $("#select-native-2").append("<option value='"+ data[select_native_1][0]["meteograma"][key] +"'>" + data[select_native_1][0]["dom_desc"][key] + "</option>"); 
-          //alert(key);
         }
         $('#select-native-2').selectmenu('refresh');
         for (key in data[select_native_1][0]["parametrizaciones"]){
           $("#select-native-3").append("<option value='"+ data[select_native_1][0]["parametrizaciones"][key] +"'>" + data[select_native_1][0]["parametrizaciones"][key] + "</option>"); 
-          //alert(key);
         }
         $('#select-native-3').selectmenu('refresh');
         for (key in data[select_native_1][0]["variables"]){
           $("#select-native-4").append("<option value='"+ data[select_native_1][0]["variables"][key] +"'>" + data[select_native_1][0]["variables"][key] + "</option>"); 
-          //alert(key);
         }
         $('#select-native-4').selectmenu('refresh');
     });
-
+    // Cuando cambia la hora en el slider
     $("#point").change(function(){
       //evento cargando
       $.mobile.loading( "show", {
@@ -108,19 +112,16 @@ function mapas(){
         textonly: false,
         html: ""
       });
+      // Obtenemos el valor y las variables
       var valor = $("#points").val();
       var select_native_1 = $('#select-native-1').val();
       var meteograma = $('#select-native-2').val();
       var parametrizaciones = $('#select-native-3').val();
       var variables = $('#select-native-4').val();
-      
-      //alert(data[select_native_1][0]["fotos_url"]);
-      //valor = addZero(valor);
       var hora = valor;
       var d = new Date();
       var dia = data[select_native_1][0]["fecha"];
       d.setFullYear(dia.substring(0, 4),dia.substring(4, 6),dia.substring(6, 8));
-      //d = d + 1;
       d.setDate(d.getDate() + 1);
       //Si es mas de 24 horas vuelve a 0
       if(hora > 23){
@@ -131,22 +132,19 @@ function mapas(){
       var dia = addZero(d.getDate());
       var mes = addZero(d.getMonth());
       var anyo = d.getFullYear();
+      // Dirección del servidor puente
       host = "http://banot.etsii.ull.es/alu4213/gota/img.php";
+      // URL de la imagen
       var imagen = host + "/media/demonio/imagenes/"+data[select_native_1][0]["fecha"]+"/zona"+meteograma+"/ensemble/"+variables+"/"+anyo+""+mes+""+dia+""+hora+"00.png";
-      //alert(imagen);
-      //$("#url").text(imagen);
+      // Cargamos la fecha la hora y la imagen
       $("#hora").text("Fecha: "+anyo+""+mes+""+dia+" Hora: "+hora+":00");
       $("#image").attr("src", imagen);
-      //var altura_dispositivo = $( window ).width();
-      //var altura_total = altura_dispositivo * 0.95;
-      //$('#image').width(altura_total);
-      //alert("http://10.209.2.98/media/demonio/"+select_native_1+"/zona"+meteograma+"/"+parametrizaciones+"/"+variables+"/"+valor+".png");
-        //$("#image").attr("src", "http://www.aemet.es/imagenes_d/eltiempo/observacion/satelite/" + año + "" + mes + "" + day + "" + valor + "00_s93g.gif");
     });
     //cuando la imagen acaba de cargar quitamos el icono
     $( "#image" ).load(function() {
       $.mobile.loading( "hide" );
     });
+    // Cargamos los datos al seleccinar el link
     $("#addMap").click(function(){
       $.mobile.loading( "show", {
         text: "Cargando",
@@ -159,14 +157,12 @@ function mapas(){
       var meteograma = $('#select-native-2').val();
       var parametrizaciones = $('#select-native-3').val();
       var variables = $('#select-native-4').val();
-      
-      //alert(data[select_native_1][0]["fotos_url"]);
-      //valor = addZero(valor);
+
       var hora = 0;
       var d = new Date();
       var dia = data[select_native_1][0]["fecha"];
       d.setFullYear(dia.substring(0, 4),dia.substring(4, 6),dia.substring(6, 8));
-      //d = d + 1;
+
       d.setDate(d.getDate() + 1);
       //Si es mas de 24 horas vuelve a 0
       if(hora > 23){
