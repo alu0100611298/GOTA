@@ -7,7 +7,7 @@
 
 Aplicación multiplataforma desarrollada con Phonegap y compilada en Phonegap Build
 
-Demo web de la aplicación: <a href="http://alu0100611298.github.io/GOTA/gota/" target="_blank">http://banot.etsii.ull.es/alu4213/gota/</a>
+Demo web de la aplicación: <a href="http://alu0100611298.github.io/GOTA/gota/" target="_blank">http://alu0100611298.github.io/GOTA/gota/</a>
 
 Descarga de la aplicación Phonega Build: <a href="https://build.phonegap.com/apps/1558748/share" target="_blank">https://build.phonegap.com/apps/1558748/share</a>
 
